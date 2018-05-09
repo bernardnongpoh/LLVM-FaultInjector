@@ -1,0 +1,2192 @@
+; ModuleID = 'llvm-link'
+source_filename = "llvm-link"
+target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%"class.std::random_device" = type { %union.anon }
+%union.anon = type { %"class.std::mersenne_twister_engine" }
+%"class.std::mersenne_twister_engine" = type { [624 x i64], i64 }
+%"class.std::uniform_int_distribution" = type { %"struct.std::uniform_int_distribution<int>::param_type" }
+%"struct.std::uniform_int_distribution<int>::param_type" = type { i32, i32 }
+%"class.std::uniform_real_distribution" = type { %"struct.std::uniform_real_distribution<double>::param_type" }
+%"struct.std::uniform_real_distribution<double>::param_type" = type { double, double }
+%"class.std::__cxx11::basic_string" = type { %"struct.std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider", i64, %union.anon.0 }
+%"struct.std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider" = type { i8* }
+%union.anon.0 = type { i64, [8 x i8] }
+%"class.std::allocator" = type { i8 }
+%"struct.std::__detail::_Adaptor" = type { %"class.std::mersenne_twister_engine"* }
+
+$_ZNSt25uniform_real_distributionIdEC2Edd = comdat any
+
+$_ZNSt25uniform_real_distributionIdE10param_typeC2Edd = comdat any
+
+$_ZNSt24uniform_int_distributionIiEC2Eii = comdat any
+
+$_ZNSt24uniform_int_distributionIiE10param_typeC2Eii = comdat any
+
+$_ZNSt13random_deviceclEv = comdat any
+
+$_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEC2Em = comdat any
+
+$_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE4seedEm = comdat any
+
+$_ZNSt8__detail5__modImLm4294967296ELm1ELm0EEET_S1_ = comdat any
+
+$_ZNSt8__detail5__modImLm624ELm1ELm0EEET_S1_ = comdat any
+
+$_ZNSt8__detail4_ModImLm624ELm1ELm0ELb1ELb1EE6__calcEm = comdat any
+
+$_ZNSt8__detail4_ModImLm4294967296ELm1ELm0ELb1ELb1EE6__calcEm = comdat any
+
+$_ZNSt13random_deviceC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE = comdat any
+
+$_ZNSt13random_deviceD2Ev = comdat any
+
+$__clang_call_terminate = comdat any
+
+$_ZNSt14numeric_limitsIfE3minEv = comdat any
+
+$_ZNSt14numeric_limitsIfE3maxEv = comdat any
+
+$_ZNSt14numeric_limitsIdE3minEv = comdat any
+
+$_ZNSt14numeric_limitsIdE3maxEv = comdat any
+
+$_ZNSt24uniform_int_distributionIiEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEiRT_ = comdat any
+
+$_ZNSt24uniform_int_distributionIiEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEiRT_RKNS0_10param_typeE = comdat any
+
+$_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE3minEv = comdat any
+
+$_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE3maxEv = comdat any
+
+$_ZNKSt24uniform_int_distributionIiE10param_type1bEv = comdat any
+
+$_ZNKSt24uniform_int_distributionIiE10param_type1aEv = comdat any
+
+$_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEclEv = comdat any
+
+$_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE11_M_gen_randEv = comdat any
+
+$_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_ = comdat any
+
+$_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_RKNS0_10param_typeE = comdat any
+
+$_ZNSt8__detail8_AdaptorISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEdEC2ERS2_ = comdat any
+
+$_ZNSt8__detail8_AdaptorISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEdEclEv = comdat any
+
+$_ZNKSt25uniform_real_distributionIdE10param_type1bEv = comdat any
+
+$_ZNKSt25uniform_real_distributionIdE10param_type1aEv = comdat any
+
+$_ZSt18generate_canonicalIdLm53ESt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEET_RT1_ = comdat any
+
+$_ZSt3minImERKT_S2_S2_ = comdat any
+
+$_ZSt3loge = comdat any
+
+$_ZSt3maxImERKT_S2_S2_ = comdat any
+
+@rd = global %"class.std::random_device" zeroinitializer, align 8
+@gen = global %"class.std::mersenne_twister_engine" zeroinitializer, align 8
+@dis = global %"class.std::uniform_int_distribution" zeroinitializer, align 4
+@disRealFloat = global %"class.std::uniform_real_distribution" zeroinitializer, align 8
+@disRealDouble = global %"class.std::uniform_real_distribution" zeroinitializer, align 8
+@globalDimensionArray = global [4 x i32] zeroinitializer, align 16
+@loadCounter = global i32 0, align 4
+@storeCounter = global i32 0, align 4
+@llvm.global_ctors = appending global [1 x { i32, void ()*, i8* }] [{ i32, void ()*, i8* } { i32 65535, void ()* @_GLOBAL__sub_I_Runtime.cpp, i8* null }]
+@.str = private unnamed_addr constant [8 x i8] c"default\00", align 1
+@.str.5 = private unnamed_addr constant [21 x i8] c"Data: %d, Index: %d\0A\00", align 1
+@.str.6 = private unnamed_addr constant [41 x i8] c"Tool can handle only up to 4th Dimension\00", align 1
+@.str.7 = private unnamed_addr constant [12 x i8] c"random = %d\00", align 1
+@.str.8 = private unnamed_addr constant [16 x i8] c"Dimension = %d\0A\00", align 1
+@.str.9 = private unnamed_addr constant [32 x i8] c"----------Statistics----------\0A\00", align 1
+@.str.10 = private unnamed_addr constant [15 x i8] c" # Load = %d \0A\00", align 1
+@.str.11 = private unnamed_addr constant [16 x i8] c" # STORE = %d \0A\00", align 1
+@.str.1 = private unnamed_addr constant [7 x i8] c"Res=%c\00", align 1
+
+; Function Attrs: noinline uwtable
+define internal void @_GLOBAL__sub_I_Runtime.cpp() #0 section ".text.startup" {
+entry:
+  call void @__cxx_global_var_init()
+  call void @__cxx_global_var_init.1()
+  call void @__cxx_global_var_init.2()
+  call void @__cxx_global_var_init.3()
+  call void @__cxx_global_var_init.4()
+  ret void
+}
+
+; Function Attrs: noinline uwtable
+define internal void @__cxx_global_var_init() #0 section ".text.startup" personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %ref.tmp = alloca %"class.std::__cxx11::basic_string", align 8
+  %ref.tmp1 = alloca %"class.std::allocator", align 1
+  %exn.slot = alloca i8*
+  %ehselector.slot = alloca i32
+  call void @_ZNSaIcEC1Ev(%"class.std::allocator"* %ref.tmp1) #5
+  invoke void @_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1EPKcRKS3_(%"class.std::__cxx11::basic_string"* %ref.tmp, i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str, i32 0, i32 0), %"class.std::allocator"* dereferenceable(1) %ref.tmp1)
+          to label %invoke.cont unwind label %lpad
+
+invoke.cont:                                      ; preds = %entry
+  invoke void @_ZNSt13random_deviceC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE(%"class.std::random_device"* @rd, %"class.std::__cxx11::basic_string"* dereferenceable(32) %ref.tmp)
+          to label %invoke.cont3 unwind label %lpad2
+
+invoke.cont3:                                     ; preds = %invoke.cont
+  call void @_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev(%"class.std::__cxx11::basic_string"* %ref.tmp) #5
+  call void @_ZNSaIcED1Ev(%"class.std::allocator"* %ref.tmp1) #5
+  %0 = call i32 @atexit(void ()* @__dtor_rd) #5
+  ret void
+
+lpad:                                             ; preds = %entry
+  %1 = landingpad { i8*, i32 }
+          cleanup
+  %2 = extractvalue { i8*, i32 } %1, 0
+  store i8* %2, i8** %exn.slot, align 8
+  %3 = extractvalue { i8*, i32 } %1, 1
+  store i32 %3, i32* %ehselector.slot, align 4
+  br label %ehcleanup
+
+lpad2:                                            ; preds = %invoke.cont
+  %4 = landingpad { i8*, i32 }
+          cleanup
+  %5 = extractvalue { i8*, i32 } %4, 0
+  store i8* %5, i8** %exn.slot, align 8
+  %6 = extractvalue { i8*, i32 } %4, 1
+  store i32 %6, i32* %ehselector.slot, align 4
+  call void @_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev(%"class.std::__cxx11::basic_string"* %ref.tmp) #5
+  br label %ehcleanup
+
+ehcleanup:                                        ; preds = %lpad2, %lpad
+  call void @_ZNSaIcED1Ev(%"class.std::allocator"* %ref.tmp1) #5
+  br label %eh.resume
+
+eh.resume:                                        ; preds = %ehcleanup
+  %exn = load i8*, i8** %exn.slot, align 8
+  %sel = load i32, i32* %ehselector.slot, align 4
+  %lpad.val = insertvalue { i8*, i32 } undef, i8* %exn, 0
+  %lpad.val4 = insertvalue { i8*, i32 } %lpad.val, i32 %sel, 1
+  resume { i8*, i32 } %lpad.val4
+}
+
+; Function Attrs: noinline uwtable
+define internal void @__cxx_global_var_init.1() #0 section ".text.startup" {
+entry:
+  %call = call i32 @_ZNSt13random_deviceclEv(%"class.std::random_device"* @rd)
+  %conv = zext i32 %call to i64
+  call void @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEC2Em(%"class.std::mersenne_twister_engine"* @gen, i64 %conv)
+  ret void
+}
+
+; Function Attrs: noinline uwtable
+define internal void @__cxx_global_var_init.2() #0 section ".text.startup" {
+entry:
+  call void @_ZNSt24uniform_int_distributionIiEC2Eii(%"class.std::uniform_int_distribution"* @dis, i32 -100000, i32 100000)
+  ret void
+}
+
+; Function Attrs: noinline uwtable
+define internal void @__cxx_global_var_init.3() #0 section ".text.startup" {
+entry:
+  call void @_ZNSt25uniform_real_distributionIdEC2Edd(%"class.std::uniform_real_distribution"* @disRealFloat, double -1.000000e+05, double 1.000000e+05)
+  ret void
+}
+
+; Function Attrs: noinline uwtable
+define internal void @__cxx_global_var_init.4() #0 section ".text.startup" {
+entry:
+  call void @_ZNSt25uniform_real_distributionIdEC2Edd(%"class.std::uniform_real_distribution"* @disRealDouble, double -1.000000e+05, double 1.000000e+05)
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr void @_ZNSt25uniform_real_distributionIdEC2Edd(%"class.std::uniform_real_distribution"* %this, double %__a, double %__b) unnamed_addr #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::uniform_real_distribution"*, align 8
+  %__a.addr = alloca double, align 8
+  %__b.addr = alloca double, align 8
+  store %"class.std::uniform_real_distribution"* %this, %"class.std::uniform_real_distribution"** %this.addr, align 8
+  store double %__a, double* %__a.addr, align 8
+  store double %__b, double* %__b.addr, align 8
+  %this1 = load %"class.std::uniform_real_distribution"*, %"class.std::uniform_real_distribution"** %this.addr, align 8
+  %_M_param = getelementptr inbounds %"class.std::uniform_real_distribution", %"class.std::uniform_real_distribution"* %this1, i32 0, i32 0
+  %0 = load double, double* %__a.addr, align 8
+  %1 = load double, double* %__b.addr, align 8
+  call void @_ZNSt25uniform_real_distributionIdE10param_typeC2Edd(%"struct.std::uniform_real_distribution<double>::param_type"* %_M_param, double %0, double %1)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr void @_ZNSt25uniform_real_distributionIdE10param_typeC2Edd(%"struct.std::uniform_real_distribution<double>::param_type"* %this, double %__a, double %__b) unnamed_addr #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::uniform_real_distribution<double>::param_type"*, align 8
+  %__a.addr = alloca double, align 8
+  %__b.addr = alloca double, align 8
+  store %"struct.std::uniform_real_distribution<double>::param_type"* %this, %"struct.std::uniform_real_distribution<double>::param_type"** %this.addr, align 8
+  store double %__a, double* %__a.addr, align 8
+  store double %__b, double* %__b.addr, align 8
+  %this1 = load %"struct.std::uniform_real_distribution<double>::param_type"*, %"struct.std::uniform_real_distribution<double>::param_type"** %this.addr, align 8
+  %_M_a = getelementptr inbounds %"struct.std::uniform_real_distribution<double>::param_type", %"struct.std::uniform_real_distribution<double>::param_type"* %this1, i32 0, i32 0
+  %0 = load double, double* %__a.addr, align 8
+  store double %0, double* %_M_a, align 8
+  %_M_b = getelementptr inbounds %"struct.std::uniform_real_distribution<double>::param_type", %"struct.std::uniform_real_distribution<double>::param_type"* %this1, i32 0, i32 1
+  %1 = load double, double* %__b.addr, align 8
+  store double %1, double* %_M_b, align 8
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr void @_ZNSt24uniform_int_distributionIiEC2Eii(%"class.std::uniform_int_distribution"* %this, i32 %__a, i32 %__b) unnamed_addr #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::uniform_int_distribution"*, align 8
+  %__a.addr = alloca i32, align 4
+  %__b.addr = alloca i32, align 4
+  store %"class.std::uniform_int_distribution"* %this, %"class.std::uniform_int_distribution"** %this.addr, align 8
+  store i32 %__a, i32* %__a.addr, align 4
+  store i32 %__b, i32* %__b.addr, align 4
+  %this1 = load %"class.std::uniform_int_distribution"*, %"class.std::uniform_int_distribution"** %this.addr, align 8
+  %_M_param = getelementptr inbounds %"class.std::uniform_int_distribution", %"class.std::uniform_int_distribution"* %this1, i32 0, i32 0
+  %0 = load i32, i32* %__a.addr, align 4
+  %1 = load i32, i32* %__b.addr, align 4
+  call void @_ZNSt24uniform_int_distributionIiE10param_typeC2Eii(%"struct.std::uniform_int_distribution<int>::param_type"* %_M_param, i32 %0, i32 %1)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr void @_ZNSt24uniform_int_distributionIiE10param_typeC2Eii(%"struct.std::uniform_int_distribution<int>::param_type"* %this, i32 %__a, i32 %__b) unnamed_addr #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::uniform_int_distribution<int>::param_type"*, align 8
+  %__a.addr = alloca i32, align 4
+  %__b.addr = alloca i32, align 4
+  store %"struct.std::uniform_int_distribution<int>::param_type"* %this, %"struct.std::uniform_int_distribution<int>::param_type"** %this.addr, align 8
+  store i32 %__a, i32* %__a.addr, align 4
+  store i32 %__b, i32* %__b.addr, align 4
+  %this1 = load %"struct.std::uniform_int_distribution<int>::param_type"*, %"struct.std::uniform_int_distribution<int>::param_type"** %this.addr, align 8
+  %_M_a = getelementptr inbounds %"struct.std::uniform_int_distribution<int>::param_type", %"struct.std::uniform_int_distribution<int>::param_type"* %this1, i32 0, i32 0
+  %0 = load i32, i32* %__a.addr, align 4
+  store i32 %0, i32* %_M_a, align 4
+  %_M_b = getelementptr inbounds %"struct.std::uniform_int_distribution<int>::param_type", %"struct.std::uniform_int_distribution<int>::param_type"* %this1, i32 0, i32 1
+  %1 = load i32, i32* %__b.addr, align 4
+  store i32 %1, i32* %_M_b, align 4
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr i32 @_ZNSt13random_deviceclEv(%"class.std::random_device"* %this) #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::random_device"*, align 8
+  store %"class.std::random_device"* %this, %"class.std::random_device"** %this.addr, align 8
+  %this1 = load %"class.std::random_device"*, %"class.std::random_device"** %this.addr, align 8
+  %call = call i32 @_ZNSt13random_device9_M_getvalEv(%"class.std::random_device"* %this1)
+  ret i32 %call
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr void @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEC2Em(%"class.std::mersenne_twister_engine"* %this, i64 %__sd) unnamed_addr #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::mersenne_twister_engine"*, align 8
+  %__sd.addr = alloca i64, align 8
+  store %"class.std::mersenne_twister_engine"* %this, %"class.std::mersenne_twister_engine"** %this.addr, align 8
+  store i64 %__sd, i64* %__sd.addr, align 8
+  %this1 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %this.addr, align 8
+  %0 = load i64, i64* %__sd.addr, align 8
+  call void @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE4seedEm(%"class.std::mersenne_twister_engine"* %this1, i64 %0)
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr void @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE4seedEm(%"class.std::mersenne_twister_engine"* %this, i64 %__sd) #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::mersenne_twister_engine"*, align 8
+  %__sd.addr = alloca i64, align 8
+  %__i = alloca i64, align 8
+  %__x = alloca i64, align 8
+  store %"class.std::mersenne_twister_engine"* %this, %"class.std::mersenne_twister_engine"** %this.addr, align 8
+  store i64 %__sd, i64* %__sd.addr, align 8
+  %this1 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %this.addr, align 8
+  %0 = load i64, i64* %__sd.addr, align 8
+  %call = call i64 @_ZNSt8__detail5__modImLm4294967296ELm1ELm0EEET_S1_(i64 %0)
+  %_M_x = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %arrayidx = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x, i64 0, i64 0
+  store i64 %call, i64* %arrayidx, align 8
+  store i64 1, i64* %__i, align 8
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %1 = load i64, i64* %__i, align 8
+  %cmp = icmp ult i64 %1, 624
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %_M_x2 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %2 = load i64, i64* %__i, align 8
+  %sub = sub i64 %2, 1
+  %arrayidx3 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x2, i64 0, i64 %sub
+  %3 = load i64, i64* %arrayidx3, align 8
+  store i64 %3, i64* %__x, align 8
+  %4 = load i64, i64* %__x, align 8
+  %shr = lshr i64 %4, 30
+  %5 = load i64, i64* %__x, align 8
+  %xor = xor i64 %5, %shr
+  store i64 %xor, i64* %__x, align 8
+  %6 = load i64, i64* %__x, align 8
+  %mul = mul i64 %6, 1812433253
+  store i64 %mul, i64* %__x, align 8
+  %7 = load i64, i64* %__i, align 8
+  %call4 = call i64 @_ZNSt8__detail5__modImLm624ELm1ELm0EEET_S1_(i64 %7)
+  %8 = load i64, i64* %__x, align 8
+  %add = add i64 %8, %call4
+  store i64 %add, i64* %__x, align 8
+  %9 = load i64, i64* %__x, align 8
+  %call5 = call i64 @_ZNSt8__detail5__modImLm4294967296ELm1ELm0EEET_S1_(i64 %9)
+  %_M_x6 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %10 = load i64, i64* %__i, align 8
+  %arrayidx7 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x6, i64 0, i64 %10
+  store i64 %call5, i64* %arrayidx7, align 8
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %11 = load i64, i64* %__i, align 8
+  %inc = add i64 %11, 1
+  store i64 %inc, i64* %__i, align 8
+  br label %for.cond
+
+for.end:                                          ; preds = %for.cond
+  %_M_p = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 1
+  store i64 624, i64* %_M_p, align 8
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr i64 @_ZNSt8__detail5__modImLm4294967296ELm1ELm0EEET_S1_(i64 %__x) #1 comdat {
+entry:
+  %__x.addr = alloca i64, align 8
+  store i64 %__x, i64* %__x.addr, align 8
+  %0 = load i64, i64* %__x.addr, align 8
+  %call = call i64 @_ZNSt8__detail4_ModImLm4294967296ELm1ELm0ELb1ELb1EE6__calcEm(i64 %0)
+  ret i64 %call
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr i64 @_ZNSt8__detail5__modImLm624ELm1ELm0EEET_S1_(i64 %__x) #1 comdat {
+entry:
+  %__x.addr = alloca i64, align 8
+  store i64 %__x, i64* %__x.addr, align 8
+  %0 = load i64, i64* %__x.addr, align 8
+  %call = call i64 @_ZNSt8__detail4_ModImLm624ELm1ELm0ELb1ELb1EE6__calcEm(i64 %0)
+  ret i64 %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr i64 @_ZNSt8__detail4_ModImLm624ELm1ELm0ELb1ELb1EE6__calcEm(i64 %__x) #2 comdat align 2 {
+entry:
+  %__x.addr = alloca i64, align 8
+  %__res = alloca i64, align 8
+  store i64 %__x, i64* %__x.addr, align 8
+  %0 = load i64, i64* %__x.addr, align 8
+  %mul = mul i64 1, %0
+  %add = add i64 %mul, 0
+  store i64 %add, i64* %__res, align 8
+  %1 = load i64, i64* %__res, align 8
+  %rem = urem i64 %1, 624
+  store i64 %rem, i64* %__res, align 8
+  %2 = load i64, i64* %__res, align 8
+  ret i64 %2
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr i64 @_ZNSt8__detail4_ModImLm4294967296ELm1ELm0ELb1ELb1EE6__calcEm(i64 %__x) #2 comdat align 2 {
+entry:
+  %__x.addr = alloca i64, align 8
+  %__res = alloca i64, align 8
+  store i64 %__x, i64* %__x.addr, align 8
+  %0 = load i64, i64* %__x.addr, align 8
+  %mul = mul i64 1, %0
+  %add = add i64 %mul, 0
+  store i64 %add, i64* %__res, align 8
+  %1 = load i64, i64* %__res, align 8
+  %rem = urem i64 %1, 4294967296
+  store i64 %rem, i64* %__res, align 8
+  %2 = load i64, i64* %__res, align 8
+  ret i64 %2
+}
+
+declare i32 @_ZNSt13random_device9_M_getvalEv(%"class.std::random_device"*) #3
+
+declare i32 @__gxx_personality_v0(...)
+
+; Function Attrs: nounwind
+declare void @_ZNSaIcEC1Ev(%"class.std::allocator"*) unnamed_addr #4
+
+declare void @_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1EPKcRKS3_(%"class.std::__cxx11::basic_string"*, i8*, %"class.std::allocator"* dereferenceable(1)) unnamed_addr #3
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr void @_ZNSt13random_deviceC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE(%"class.std::random_device"* %this, %"class.std::__cxx11::basic_string"* dereferenceable(32) %__token) unnamed_addr #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::random_device"*, align 8
+  %__token.addr = alloca %"class.std::__cxx11::basic_string"*, align 8
+  store %"class.std::random_device"* %this, %"class.std::random_device"** %this.addr, align 8
+  store %"class.std::__cxx11::basic_string"* %__token, %"class.std::__cxx11::basic_string"** %__token.addr, align 8
+  %this1 = load %"class.std::random_device"*, %"class.std::random_device"** %this.addr, align 8
+  %0 = load %"class.std::__cxx11::basic_string"*, %"class.std::__cxx11::basic_string"** %__token.addr, align 8
+  call void @_ZNSt13random_device7_M_initERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE(%"class.std::random_device"* %this1, %"class.std::__cxx11::basic_string"* dereferenceable(32) %0)
+  ret void
+}
+
+; Function Attrs: nounwind
+declare void @_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev(%"class.std::__cxx11::basic_string"*) unnamed_addr #4
+
+; Function Attrs: nounwind
+declare void @_ZNSaIcED1Ev(%"class.std::allocator"*) unnamed_addr #4
+
+; Function Attrs: noinline uwtable
+define internal void @__dtor_rd() #0 section ".text.startup" {
+entry:
+  call void @_ZNSt13random_deviceD2Ev(%"class.std::random_device"* @rd)
+  ret void
+}
+
+; Function Attrs: nounwind
+declare i32 @atexit(void ()*) #5
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr void @_ZNSt13random_deviceD2Ev(%"class.std::random_device"* %this) unnamed_addr #2 comdat align 2 personality i8* bitcast (i32 (...)* @__gxx_personality_v0 to i8*) {
+entry:
+  %this.addr = alloca %"class.std::random_device"*, align 8
+  store %"class.std::random_device"* %this, %"class.std::random_device"** %this.addr, align 8
+  %this1 = load %"class.std::random_device"*, %"class.std::random_device"** %this.addr, align 8
+  invoke void @_ZNSt13random_device7_M_finiEv(%"class.std::random_device"* %this1)
+          to label %invoke.cont unwind label %terminate.lpad
+
+invoke.cont:                                      ; preds = %entry
+  ret void
+
+terminate.lpad:                                   ; preds = %entry
+  %0 = landingpad { i8*, i32 }
+          catch i8* null
+  %1 = extractvalue { i8*, i32 } %0, 0
+  call void @__clang_call_terminate(i8* %1) #10
+  unreachable
+}
+
+declare void @_ZNSt13random_device7_M_finiEv(%"class.std::random_device"*) #3
+
+; Function Attrs: noinline noreturn nounwind
+define linkonce_odr hidden void @__clang_call_terminate(i8*) #6 comdat {
+  %2 = call i8* @__cxa_begin_catch(i8* %0) #5
+  call void @_ZSt9terminatev() #10
+  unreachable
+}
+
+declare i8* @__cxa_begin_catch(i8*)
+
+declare void @_ZSt9terminatev()
+
+declare void @_ZNSt13random_device7_M_initERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE(%"class.std::random_device"*, %"class.std::__cxx11::basic_string"* dereferenceable(32)) #3
+
+; Function Attrs: noinline nounwind optnone uwtable
+define void @_Z25clearGlobalDimensionArrayv() #2 {
+entry:
+  %i = alloca i32, align 4
+  store i32 0, i32* %i, align 4
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %0 = load i32, i32* %i, align 4
+  %cmp = icmp slt i32 %0, 4
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %1 = load i32, i32* %i, align 4
+  %idxprom = sext i32 %1 to i64
+  %arrayidx = getelementptr inbounds [4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 %idxprom
+  store i32 -1, i32* %arrayidx, align 4
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %2 = load i32, i32* %i, align 4
+  %inc = add nsw i32 %2, 1
+  store i32 %inc, i32* %i, align 4
+  br label %for.cond
+
+for.end:                                          ; preds = %for.cond
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define void @_Z26insertGlobalDimensionArrayii(i32 %data, i32 %index) #1 {
+entry:
+  %data.addr = alloca i32, align 4
+  %index.addr = alloca i32, align 4
+  store i32 %data, i32* %data.addr, align 4
+  store i32 %index, i32* %index.addr, align 4
+  %0 = load i32, i32* %data.addr, align 4
+  %1 = load i32, i32* %index.addr, align 4
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([21 x i8], [21 x i8]* @.str.5, i32 0, i32 0), i32 %0, i32 %1)
+  %2 = load i32, i32* %index.addr, align 4
+  %cmp = icmp sgt i32 %2, 4
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([41 x i8], [41 x i8]* @.str.6, i32 0, i32 0))
+  br label %if.end
+
+if.end:                                           ; preds = %if.then, %entry
+  %3 = load i32, i32* %data.addr, align 4
+  %4 = load i32, i32* %index.addr, align 4
+  %idxprom = sext i32 %4 to i64
+  %arrayidx = getelementptr inbounds [4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 %idxprom
+  store i32 %3, i32* %arrayidx, align 4
+  ret void
+}
+
+declare i32 @printf(i8*, ...) #3
+
+; Function Attrs: noinline optnone uwtable
+define i32 @_Z25getGlobalDimensionalArrayi(i32 %index) #1 {
+entry:
+  %retval = alloca i32, align 4
+  %index.addr = alloca i32, align 4
+  store i32 %index, i32* %index.addr, align 4
+  %0 = load i32, i32* %index.addr, align 4
+  %cmp = icmp sgt i32 %0, 4
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([41 x i8], [41 x i8]* @.str.6, i32 0, i32 0))
+  store i32 0, i32* %retval, align 4
+  br label %return
+
+if.end:                                           ; preds = %entry
+  %1 = load i32, i32* %index.addr, align 4
+  %idxprom = sext i32 %1 to i64
+  %arrayidx = getelementptr inbounds [4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 %idxprom
+  %2 = load i32, i32* %arrayidx, align 4
+  store i32 %2, i32* %retval, align 4
+  br label %return
+
+return:                                           ; preds = %if.end, %if.then
+  %3 = load i32, i32* %retval, align 4
+  ret i32 %3
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define i32 @_Z5randrjj(i32 %min, i32 %max) #2 {
+entry:
+  %min.addr = alloca i32, align 4
+  %max.addr = alloca i32, align 4
+  %scaled = alloca double, align 8
+  store i32 %min, i32* %min.addr, align 4
+  store i32 %max, i32* %max.addr, align 4
+  %call = call i32 @rand() #5
+  %conv = sitofp i32 %call to double
+  %div = fdiv double %conv, 0x41DFFFFFFFC00000
+  store double %div, double* %scaled, align 8
+  %0 = load i32, i32* %max.addr, align 4
+  %1 = load i32, i32* %min.addr, align 4
+  %sub = sub i32 %0, %1
+  %add = add i32 %sub, 1
+  %conv1 = uitofp i32 %add to double
+  %2 = load double, double* %scaled, align 8
+  %mul = fmul double %conv1, %2
+  %3 = load i32, i32* %min.addr, align 4
+  %conv2 = uitofp i32 %3 to double
+  %add3 = fadd double %mul, %conv2
+  %conv4 = fptoui double %add3 to i32
+  ret i32 %conv4
+}
+
+; Function Attrs: nounwind
+declare i32 @rand() #4
+
+; Function Attrs: noinline optnone uwtable
+define i32 @_Z8flipBitsiii(i32 %number, i32 %numberOfBits, i32 %bitwidth) #1 {
+entry:
+  %number.addr = alloca i32, align 4
+  %numberOfBits.addr = alloca i32, align 4
+  %bitwidth.addr = alloca i32, align 4
+  %randomBit = alloca i32, align 4
+  store i32 %number, i32* %number.addr, align 4
+  store i32 %numberOfBits, i32* %numberOfBits.addr, align 4
+  store i32 %bitwidth, i32* %bitwidth.addr, align 4
+  %0 = load i32, i32* %bitwidth.addr, align 4
+  %call = call i32 @_Z5randrjj(i32 0, i32 %0)
+  store i32 %call, i32* %randomBit, align 4
+  %1 = load i32, i32* %randomBit, align 4
+  %shl = shl i32 1, %1
+  %2 = load i32, i32* %number.addr, align 4
+  %xor = xor i32 %2, %shl
+  store i32 %xor, i32* %number.addr, align 4
+  %3 = load i32, i32* %randomBit, align 4
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str.7, i32 0, i32 0), i32 %3)
+  %4 = load i32, i32* %number.addr, align 4
+  ret i32 %4
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define float @_Z13flipFloatBitsfii(float %number, i32 %numberOfBits, i32 %bitwidth) #2 {
+entry:
+  %number.addr = alloca float, align 4
+  %numberOfBits.addr = alloca i32, align 4
+  %bitwidth.addr = alloca i32, align 4
+  %randomBit = alloca i32, align 4
+  %temp = alloca i32*, align 8
+  store float %number, float* %number.addr, align 4
+  store i32 %numberOfBits, i32* %numberOfBits.addr, align 4
+  store i32 %bitwidth, i32* %bitwidth.addr, align 4
+  %0 = load i32, i32* %bitwidth.addr, align 4
+  %call = call i32 @_Z5randrjj(i32 0, i32 %0)
+  store i32 %call, i32* %randomBit, align 4
+  %1 = bitcast float* %number.addr to i32*
+  store i32* %1, i32** %temp, align 8
+  %2 = load i32, i32* %randomBit, align 4
+  %shl = shl i32 1, %2
+  %3 = load i32*, i32** %temp, align 8
+  %4 = load i32, i32* %3, align 4
+  %xor = xor i32 %4, %shl
+  store i32 %xor, i32* %3, align 4
+  %5 = load float, float* %number.addr, align 4
+  ret float %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define double @_Z10doubleRanddd(double %fMin, double %fMax) #2 {
+entry:
+  %fMin.addr = alloca double, align 8
+  %fMax.addr = alloca double, align 8
+  %f = alloca double, align 8
+  store double %fMin, double* %fMin.addr, align 8
+  store double %fMax, double* %fMax.addr, align 8
+  %call = call i32 @rand() #5
+  %conv = sitofp i32 %call to double
+  %div = fdiv double %conv, 0x41DFFFFFFFC00000
+  store double %div, double* %f, align 8
+  %0 = load double, double* %fMin.addr, align 8
+  %1 = load double, double* %f, align 8
+  %2 = load double, double* %fMax.addr, align 8
+  %3 = load double, double* %fMin.addr, align 8
+  %sub = fsub double %2, %3
+  %mul = fmul double %1, %sub
+  %add = fadd double %0, %mul
+  ret double %add
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define float @_Z9floatRandff(float %fMin, float %fMax) #2 {
+entry:
+  %fMin.addr = alloca float, align 4
+  %fMax.addr = alloca float, align 4
+  %f = alloca float, align 4
+  store float %fMin, float* %fMin.addr, align 4
+  store float %fMax, float* %fMax.addr, align 4
+  %call = call i32 @rand() #5
+  %conv = sitofp i32 %call to float
+  %div = fdiv float %conv, 0x41E0000000000000
+  store float %div, float* %f, align 4
+  %0 = load float, float* %fMin.addr, align 4
+  %1 = load float, float* %f, align 4
+  %2 = load float, float* %fMax.addr, align 4
+  %3 = load float, float* %fMin.addr, align 4
+  %sub = fsub float %2, %3
+  %mul = fmul float %1, %sub
+  %add = fadd float %0, %mul
+  ret float %add
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define i32 @_Z7intRandii(i32 %fMin, i32 %fMax) #2 {
+entry:
+  %fMin.addr = alloca i32, align 4
+  %fMax.addr = alloca i32, align 4
+  %f = alloca i32, align 4
+  store i32 %fMin, i32* %fMin.addr, align 4
+  store i32 %fMax, i32* %fMax.addr, align 4
+  %call = call i32 @rand() #5
+  %div = sdiv i32 %call, 2147483647
+  store i32 %div, i32* %f, align 4
+  %0 = load i32, i32* %fMin.addr, align 4
+  %1 = load i32, i32* %f, align 4
+  %2 = load i32, i32* %fMax.addr, align 4
+  %3 = load i32, i32* %fMin.addr, align 4
+  %sub = sub nsw i32 %2, %3
+  %mul = mul nsw i32 %1, %sub
+  %add = add nsw i32 %0, %mul
+  ret i32 %add
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define double @_Z14flipDoubleBitsdii(double %number, i32 %numberOfBits, i32 %bitwidth) #2 {
+entry:
+  %number.addr = alloca double, align 8
+  %numberOfBits.addr = alloca i32, align 4
+  %bitwidth.addr = alloca i32, align 4
+  %randomBit = alloca i32, align 4
+  %temp = alloca i64*, align 8
+  %N = alloca i64, align 8
+  store double %number, double* %number.addr, align 8
+  store i32 %numberOfBits, i32* %numberOfBits.addr, align 4
+  store i32 %bitwidth, i32* %bitwidth.addr, align 4
+  %call = call i32 @_Z5randrjj(i32 0, i32 52)
+  store i32 %call, i32* %randomBit, align 4
+  %0 = bitcast double* %number.addr to i64*
+  store i64* %0, i64** %temp, align 8
+  store i64 1, i64* %N, align 8
+  %1 = load i64, i64* %N, align 8
+  %2 = load i32, i32* %randomBit, align 4
+  %sh_prom = zext i32 %2 to i64
+  %shl = shl i64 %1, %sh_prom
+  %3 = load i64*, i64** %temp, align 8
+  %4 = load i64, i64* %3, align 8
+  %xor = xor i64 %4, %shl
+  store i64 %xor, i64* %3, align 8
+  %5 = load double, double* %number.addr, align 8
+  ret double %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define void @_Z4LOADv() #2 {
+entry:
+  %0 = load i32, i32* @loadCounter, align 4
+  %inc = add nsw i32 %0, 1
+  store i32 %inc, i32* @loadCounter, align 4
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define void @_Z5STOREv() #2 {
+entry:
+  %0 = load i32, i32* @storeCounter, align 4
+  %inc = add nsw i32 %0, 1
+  store i32 %inc, i32* @storeCounter, align 4
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define i32 @_Z20injectError32IntDataPi(i32* %a) #1 {
+entry:
+  %a.addr = alloca i32*, align 8
+  store i32* %a, i32** %a.addr, align 8
+  %0 = load i32*, i32** %a.addr, align 8
+  %1 = load i32, i32* %0, align 4
+  %call = call i32 @_Z8flipBitsiii(i32 %1, i32 2, i32 32)
+  %2 = load i32*, i32** %a.addr, align 8
+  store i32 %call, i32* %2, align 4
+  %3 = load i32*, i32** %a.addr, align 8
+  %4 = load i32, i32* %3, align 4
+  ret i32 %4
+}
+
+; Function Attrs: noinline optnone uwtable
+define signext i16 @_Z23flipBitOn16IntegerValues(i16 signext %a) #1 {
+entry:
+  %a.addr = alloca i16, align 2
+  %res = alloca i16, align 2
+  store i16 %a, i16* %a.addr, align 2
+  %0 = load i16, i16* %a.addr, align 2
+  %conv = sext i16 %0 to i32
+  %call = call i32 @_Z8flipBitsiii(i32 %conv, i32 1, i32 16)
+  %conv1 = trunc i32 %call to i16
+  store i16 %conv1, i16* %res, align 2
+  %1 = load i16, i16* %res, align 2
+  ret i16 %1
+}
+
+; Function Attrs: noinline optnone uwtable
+define i32 @_Z23flipBitOn32IntegerValuei(i32 %a) #1 {
+entry:
+  %a.addr = alloca i32, align 4
+  %res = alloca i32, align 4
+  store i32 %a, i32* %a.addr, align 4
+  %0 = load i32, i32* %a.addr, align 4
+  %call = call i32 @_Z8flipBitsiii(i32 %0, i32 1, i32 32)
+  store i32 %call, i32* %res, align 4
+  %1 = load i32, i32* %res, align 4
+  ret i32 %1
+}
+
+; Function Attrs: noinline optnone uwtable
+define i32 @_Z21flipBitOnIntegerValuei(i32 %a) #1 {
+entry:
+  %a.addr = alloca i32, align 4
+  %res = alloca i32, align 4
+  store i32 %a, i32* %a.addr, align 4
+  %0 = load i32, i32* %a.addr, align 4
+  %call = call i32 @_Z8flipBitsiii(i32 %0, i32 1, i32 32)
+  store i32 %call, i32* %res, align 4
+  %1 = load i32, i32* %res, align 4
+  ret i32 %1
+}
+
+; Function Attrs: noinline optnone uwtable
+define i64 @_Z23flipBitOn64IntegerValuel(i64 %a) #1 {
+entry:
+  %a.addr = alloca i64, align 8
+  %res = alloca i64, align 8
+  store i64 %a, i64* %a.addr, align 8
+  %0 = load i64, i64* %a.addr, align 8
+  %conv = trunc i64 %0 to i32
+  %call = call i32 @_Z8flipBitsiii(i32 %conv, i32 1, i32 64)
+  %conv1 = sext i32 %call to i64
+  store i64 %conv1, i64* %res, align 8
+  %1 = load i64, i64* %res, align 8
+  ret i64 %1
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define float @_Z19flipBitOnFloatValuef(float %a) #2 {
+entry:
+  %a.addr = alloca float, align 4
+  %res = alloca float, align 4
+  store float %a, float* %a.addr, align 4
+  %call = call float @_ZNSt14numeric_limitsIfE3minEv() #5
+  %call1 = call float @_ZNSt14numeric_limitsIfE3maxEv() #5
+  %call2 = call float @_Z9floatRandff(float %call, float %call1)
+  store float %call2, float* %res, align 4
+  %0 = load float, float* %res, align 4
+  ret float %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr float @_ZNSt14numeric_limitsIfE3minEv() #2 comdat align 2 {
+entry:
+  ret float 0x3810000000000000
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr float @_ZNSt14numeric_limitsIfE3maxEv() #2 comdat align 2 {
+entry:
+  ret float 0x47EFFFFFE0000000
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define double @_Z20flipBitOnDoubleValued(double %a) #2 {
+entry:
+  %a.addr = alloca double, align 8
+  %res = alloca double, align 8
+  store double %a, double* %a.addr, align 8
+  %0 = load double, double* %a.addr, align 8
+  %call = call double @_Z14flipDoubleBitsdii(double %0, i32 1, i32 64)
+  store double %call, double* %res, align 8
+  %call1 = call double @_ZNSt14numeric_limitsIdE3minEv() #5
+  %call2 = call double @_ZNSt14numeric_limitsIdE3maxEv() #5
+  %call3 = call double @_Z10doubleRanddd(double %call1, double %call2)
+  store double %call3, double* %res, align 8
+  %1 = load double, double* %res, align 8
+  ret double %1
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr double @_ZNSt14numeric_limitsIdE3minEv() #2 comdat align 2 {
+entry:
+  ret double 0x10000000000000
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr double @_ZNSt14numeric_limitsIdE3maxEv() #2 comdat align 2 {
+entry:
+  ret double 0x7FEFFFFFFFFFFFFF
+}
+
+; Function Attrs: noinline optnone uwtable
+define void @_Z22initializeIntegerArrayPii(i32* %array, i32 %noOfDimension) #1 {
+entry:
+  %array.addr = alloca i32*, align 8
+  %noOfDimension.addr = alloca i32, align 4
+  %dim = alloca i32, align 4
+  %i = alloca i32, align 4
+  %j = alloca i32, align 4
+  %k = alloca i32, align 4
+  store i32* %array, i32** %array.addr, align 8
+  store i32 %noOfDimension, i32* %noOfDimension.addr, align 4
+  store i32 0, i32* %dim, align 4
+  %0 = load i32, i32* %noOfDimension.addr, align 4
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([16 x i8], [16 x i8]* @.str.8, i32 0, i32 0), i32 %0)
+  %1 = load i32, i32* %noOfDimension.addr, align 4
+  switch i32 %1, label %sw.epilog [
+    i32 1, label %sw.bb
+    i32 2, label %sw.bb2
+    i32 3, label %sw.bb20
+  ]
+
+sw.bb:                                            ; preds = %entry
+  store i32 0, i32* %i, align 4
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %sw.bb
+  %2 = load i32, i32* %i, align 4
+  %3 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 0), align 16
+  %cmp = icmp slt i32 %2, %3
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %call1 = call i32 @_ZNSt24uniform_int_distributionIiEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEiRT_(%"class.std::uniform_int_distribution"* @dis, %"class.std::mersenne_twister_engine"* dereferenceable(5000) @gen)
+  %4 = load i32*, i32** %array.addr, align 8
+  %5 = load i32, i32* %i, align 4
+  %idx.ext = sext i32 %5 to i64
+  %add.ptr = getelementptr inbounds i32, i32* %4, i64 %idx.ext
+  store i32 %call1, i32* %add.ptr, align 4
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %6 = load i32, i32* %i, align 4
+  %inc = add nsw i32 %6, 1
+  store i32 %inc, i32* %i, align 4
+  br label %for.cond
+
+for.end:                                          ; preds = %for.cond
+  br label %sw.epilog
+
+sw.bb2:                                           ; preds = %entry
+  store i32 0, i32* %i, align 4
+  br label %for.cond3
+
+for.cond3:                                        ; preds = %for.inc17, %sw.bb2
+  %7 = load i32, i32* %i, align 4
+  %8 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 0), align 16
+  %cmp4 = icmp slt i32 %7, %8
+  br i1 %cmp4, label %for.body5, label %for.end19
+
+for.body5:                                        ; preds = %for.cond3
+  store i32 0, i32* %j, align 4
+  br label %for.cond6
+
+for.cond6:                                        ; preds = %for.inc14, %for.body5
+  %9 = load i32, i32* %j, align 4
+  %10 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %cmp7 = icmp slt i32 %9, %10
+  br i1 %cmp7, label %for.body8, label %for.end16
+
+for.body8:                                        ; preds = %for.cond6
+  %call9 = call i32 @_ZNSt24uniform_int_distributionIiEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEiRT_(%"class.std::uniform_int_distribution"* @dis, %"class.std::mersenne_twister_engine"* dereferenceable(5000) @gen)
+  %11 = load i32*, i32** %array.addr, align 8
+  %12 = load i32, i32* %i, align 4
+  %13 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %mul = mul nsw i32 %12, %13
+  %idx.ext10 = sext i32 %mul to i64
+  %add.ptr11 = getelementptr inbounds i32, i32* %11, i64 %idx.ext10
+  %14 = load i32, i32* %j, align 4
+  %idx.ext12 = sext i32 %14 to i64
+  %add.ptr13 = getelementptr inbounds i32, i32* %add.ptr11, i64 %idx.ext12
+  store i32 %call9, i32* %add.ptr13, align 4
+  br label %for.inc14
+
+for.inc14:                                        ; preds = %for.body8
+  %15 = load i32, i32* %j, align 4
+  %inc15 = add nsw i32 %15, 1
+  store i32 %inc15, i32* %j, align 4
+  br label %for.cond6
+
+for.end16:                                        ; preds = %for.cond6
+  br label %for.inc17
+
+for.inc17:                                        ; preds = %for.end16
+  %16 = load i32, i32* %i, align 4
+  %inc18 = add nsw i32 %16, 1
+  store i32 %inc18, i32* %i, align 4
+  br label %for.cond3
+
+for.end19:                                        ; preds = %for.cond3
+  br label %sw.epilog
+
+sw.bb20:                                          ; preds = %entry
+  store i32 0, i32* %i, align 4
+  br label %for.cond21
+
+for.cond21:                                       ; preds = %for.inc46, %sw.bb20
+  %17 = load i32, i32* %i, align 4
+  %18 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 0), align 16
+  %cmp22 = icmp slt i32 %17, %18
+  br i1 %cmp22, label %for.body23, label %for.end48
+
+for.body23:                                       ; preds = %for.cond21
+  store i32 0, i32* %j, align 4
+  br label %for.cond24
+
+for.cond24:                                       ; preds = %for.inc43, %for.body23
+  %19 = load i32, i32* %j, align 4
+  %20 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %cmp25 = icmp slt i32 %19, %20
+  br i1 %cmp25, label %for.body26, label %for.end45
+
+for.body26:                                       ; preds = %for.cond24
+  store i32 0, i32* %k, align 4
+  br label %for.cond27
+
+for.cond27:                                       ; preds = %for.inc40, %for.body26
+  %21 = load i32, i32* %k, align 4
+  %22 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 2), align 8
+  %cmp28 = icmp slt i32 %21, %22
+  br i1 %cmp28, label %for.body29, label %for.end42
+
+for.body29:                                       ; preds = %for.cond27
+  %call30 = call i32 @_ZNSt24uniform_int_distributionIiEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEiRT_(%"class.std::uniform_int_distribution"* @dis, %"class.std::mersenne_twister_engine"* dereferenceable(5000) @gen)
+  %23 = load i32*, i32** %array.addr, align 8
+  %24 = load i32, i32* %i, align 4
+  %25 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %26 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 2), align 8
+  %mul31 = mul nsw i32 %25, %26
+  %mul32 = mul nsw i32 %24, %mul31
+  %idx.ext33 = sext i32 %mul32 to i64
+  %add.ptr34 = getelementptr inbounds i32, i32* %23, i64 %idx.ext33
+  %27 = load i32, i32* %j, align 4
+  %28 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 2), align 8
+  %mul35 = mul nsw i32 %27, %28
+  %idx.ext36 = sext i32 %mul35 to i64
+  %add.ptr37 = getelementptr inbounds i32, i32* %add.ptr34, i64 %idx.ext36
+  %29 = load i32, i32* %k, align 4
+  %idx.ext38 = sext i32 %29 to i64
+  %add.ptr39 = getelementptr inbounds i32, i32* %add.ptr37, i64 %idx.ext38
+  store i32 %call30, i32* %add.ptr39, align 4
+  br label %for.inc40
+
+for.inc40:                                        ; preds = %for.body29
+  %30 = load i32, i32* %k, align 4
+  %inc41 = add nsw i32 %30, 1
+  store i32 %inc41, i32* %k, align 4
+  br label %for.cond27
+
+for.end42:                                        ; preds = %for.cond27
+  br label %for.inc43
+
+for.inc43:                                        ; preds = %for.end42
+  %31 = load i32, i32* %j, align 4
+  %inc44 = add nsw i32 %31, 1
+  store i32 %inc44, i32* %j, align 4
+  br label %for.cond24
+
+for.end45:                                        ; preds = %for.cond24
+  br label %for.inc46
+
+for.inc46:                                        ; preds = %for.end45
+  %32 = load i32, i32* %i, align 4
+  %inc47 = add nsw i32 %32, 1
+  store i32 %inc47, i32* %i, align 4
+  br label %for.cond21
+
+for.end48:                                        ; preds = %for.cond21
+  br label %sw.epilog
+
+sw.epilog:                                        ; preds = %entry, %for.end48, %for.end19, %for.end
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr i32 @_ZNSt24uniform_int_distributionIiEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEiRT_(%"class.std::uniform_int_distribution"* %this, %"class.std::mersenne_twister_engine"* dereferenceable(5000) %__urng) #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::uniform_int_distribution"*, align 8
+  %__urng.addr = alloca %"class.std::mersenne_twister_engine"*, align 8
+  store %"class.std::uniform_int_distribution"* %this, %"class.std::uniform_int_distribution"** %this.addr, align 8
+  store %"class.std::mersenne_twister_engine"* %__urng, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %this1 = load %"class.std::uniform_int_distribution"*, %"class.std::uniform_int_distribution"** %this.addr, align 8
+  %0 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %_M_param = getelementptr inbounds %"class.std::uniform_int_distribution", %"class.std::uniform_int_distribution"* %this1, i32 0, i32 0
+  %call = call i32 @_ZNSt24uniform_int_distributionIiEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEiRT_RKNS0_10param_typeE(%"class.std::uniform_int_distribution"* %this1, %"class.std::mersenne_twister_engine"* dereferenceable(5000) %0, %"struct.std::uniform_int_distribution<int>::param_type"* dereferenceable(8) %_M_param)
+  ret i32 %call
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr i32 @_ZNSt24uniform_int_distributionIiEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEiRT_RKNS0_10param_typeE(%"class.std::uniform_int_distribution"* %this, %"class.std::mersenne_twister_engine"* dereferenceable(5000) %__urng, %"struct.std::uniform_int_distribution<int>::param_type"* dereferenceable(8) %__param) #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::uniform_int_distribution"*, align 8
+  %__urng.addr = alloca %"class.std::mersenne_twister_engine"*, align 8
+  %__param.addr = alloca %"struct.std::uniform_int_distribution<int>::param_type"*, align 8
+  %__urngmin = alloca i64, align 8
+  %__urngmax = alloca i64, align 8
+  %__urngrange = alloca i64, align 8
+  %__urange = alloca i64, align 8
+  %__ret = alloca i64, align 8
+  %__uerange = alloca i64, align 8
+  %__scaling = alloca i64, align 8
+  %__past = alloca i64, align 8
+  %__tmp = alloca i64, align 8
+  %__uerngrange = alloca i64, align 8
+  %ref.tmp = alloca %"struct.std::uniform_int_distribution<int>::param_type", align 4
+  store %"class.std::uniform_int_distribution"* %this, %"class.std::uniform_int_distribution"** %this.addr, align 8
+  store %"class.std::mersenne_twister_engine"* %__urng, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  store %"struct.std::uniform_int_distribution<int>::param_type"* %__param, %"struct.std::uniform_int_distribution<int>::param_type"** %__param.addr, align 8
+  %this1 = load %"class.std::uniform_int_distribution"*, %"class.std::uniform_int_distribution"** %this.addr, align 8
+  %0 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %call = call i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE3minEv()
+  store i64 %call, i64* %__urngmin, align 8
+  %1 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %call2 = call i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE3maxEv()
+  store i64 %call2, i64* %__urngmax, align 8
+  %2 = load i64, i64* %__urngmax, align 8
+  %3 = load i64, i64* %__urngmin, align 8
+  %sub = sub i64 %2, %3
+  store i64 %sub, i64* %__urngrange, align 8
+  %4 = load %"struct.std::uniform_int_distribution<int>::param_type"*, %"struct.std::uniform_int_distribution<int>::param_type"** %__param.addr, align 8
+  %call3 = call i32 @_ZNKSt24uniform_int_distributionIiE10param_type1bEv(%"struct.std::uniform_int_distribution<int>::param_type"* %4)
+  %conv = sext i32 %call3 to i64
+  %5 = load %"struct.std::uniform_int_distribution<int>::param_type"*, %"struct.std::uniform_int_distribution<int>::param_type"** %__param.addr, align 8
+  %call4 = call i32 @_ZNKSt24uniform_int_distributionIiE10param_type1aEv(%"struct.std::uniform_int_distribution<int>::param_type"* %5)
+  %conv5 = sext i32 %call4 to i64
+  %sub6 = sub i64 %conv, %conv5
+  store i64 %sub6, i64* %__urange, align 8
+  %6 = load i64, i64* %__urngrange, align 8
+  %7 = load i64, i64* %__urange, align 8
+  %cmp = icmp ugt i64 %6, %7
+  br i1 %cmp, label %if.then, label %if.else
+
+if.then:                                          ; preds = %entry
+  %8 = load i64, i64* %__urange, align 8
+  %add = add i64 %8, 1
+  store i64 %add, i64* %__uerange, align 8
+  %9 = load i64, i64* %__urngrange, align 8
+  %10 = load i64, i64* %__uerange, align 8
+  %div = udiv i64 %9, %10
+  store i64 %div, i64* %__scaling, align 8
+  %11 = load i64, i64* %__uerange, align 8
+  %12 = load i64, i64* %__scaling, align 8
+  %mul = mul i64 %11, %12
+  store i64 %mul, i64* %__past, align 8
+  br label %do.body
+
+do.body:                                          ; preds = %do.cond, %if.then
+  %13 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %call7 = call i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEclEv(%"class.std::mersenne_twister_engine"* %13)
+  %14 = load i64, i64* %__urngmin, align 8
+  %sub8 = sub i64 %call7, %14
+  store i64 %sub8, i64* %__ret, align 8
+  br label %do.cond
+
+do.cond:                                          ; preds = %do.body
+  %15 = load i64, i64* %__ret, align 8
+  %16 = load i64, i64* %__past, align 8
+  %cmp9 = icmp uge i64 %15, %16
+  br i1 %cmp9, label %do.body, label %do.end
+
+do.end:                                           ; preds = %do.cond
+  %17 = load i64, i64* %__scaling, align 8
+  %18 = load i64, i64* %__ret, align 8
+  %div10 = udiv i64 %18, %17
+  store i64 %div10, i64* %__ret, align 8
+  br label %if.end30
+
+if.else:                                          ; preds = %entry
+  %19 = load i64, i64* %__urngrange, align 8
+  %20 = load i64, i64* %__urange, align 8
+  %cmp11 = icmp ult i64 %19, %20
+  br i1 %cmp11, label %if.then12, label %if.else27
+
+if.then12:                                        ; preds = %if.else
+  br label %do.body13
+
+do.body13:                                        ; preds = %lor.end, %if.then12
+  %21 = load i64, i64* %__urngrange, align 8
+  %add14 = add i64 %21, 1
+  store i64 %add14, i64* %__uerngrange, align 8
+  %22 = load i64, i64* %__uerngrange, align 8
+  %23 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %24 = load i64, i64* %__urange, align 8
+  %25 = load i64, i64* %__uerngrange, align 8
+  %div15 = udiv i64 %24, %25
+  %conv16 = trunc i64 %div15 to i32
+  call void @_ZNSt24uniform_int_distributionIiE10param_typeC2Eii(%"struct.std::uniform_int_distribution<int>::param_type"* %ref.tmp, i32 0, i32 %conv16)
+  %call17 = call i32 @_ZNSt24uniform_int_distributionIiEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEiRT_RKNS0_10param_typeE(%"class.std::uniform_int_distribution"* %this1, %"class.std::mersenne_twister_engine"* dereferenceable(5000) %23, %"struct.std::uniform_int_distribution<int>::param_type"* dereferenceable(8) %ref.tmp)
+  %conv18 = sext i32 %call17 to i64
+  %mul19 = mul i64 %22, %conv18
+  store i64 %mul19, i64* %__tmp, align 8
+  %26 = load i64, i64* %__tmp, align 8
+  %27 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %call20 = call i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEclEv(%"class.std::mersenne_twister_engine"* %27)
+  %28 = load i64, i64* %__urngmin, align 8
+  %sub21 = sub i64 %call20, %28
+  %add22 = add i64 %26, %sub21
+  store i64 %add22, i64* %__ret, align 8
+  br label %do.cond23
+
+do.cond23:                                        ; preds = %do.body13
+  %29 = load i64, i64* %__ret, align 8
+  %30 = load i64, i64* %__urange, align 8
+  %cmp24 = icmp ugt i64 %29, %30
+  br i1 %cmp24, label %lor.end, label %lor.rhs
+
+lor.rhs:                                          ; preds = %do.cond23
+  %31 = load i64, i64* %__ret, align 8
+  %32 = load i64, i64* %__tmp, align 8
+  %cmp25 = icmp ult i64 %31, %32
+  br label %lor.end
+
+lor.end:                                          ; preds = %lor.rhs, %do.cond23
+  %33 = phi i1 [ true, %do.cond23 ], [ %cmp25, %lor.rhs ]
+  br i1 %33, label %do.body13, label %do.end26
+
+do.end26:                                         ; preds = %lor.end
+  br label %if.end
+
+if.else27:                                        ; preds = %if.else
+  %34 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %call28 = call i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEclEv(%"class.std::mersenne_twister_engine"* %34)
+  %35 = load i64, i64* %__urngmin, align 8
+  %sub29 = sub i64 %call28, %35
+  store i64 %sub29, i64* %__ret, align 8
+  br label %if.end
+
+if.end:                                           ; preds = %if.else27, %do.end26
+  br label %if.end30
+
+if.end30:                                         ; preds = %if.end, %do.end
+  %36 = load i64, i64* %__ret, align 8
+  %37 = load %"struct.std::uniform_int_distribution<int>::param_type"*, %"struct.std::uniform_int_distribution<int>::param_type"** %__param.addr, align 8
+  %call31 = call i32 @_ZNKSt24uniform_int_distributionIiE10param_type1aEv(%"struct.std::uniform_int_distribution<int>::param_type"* %37)
+  %conv32 = sext i32 %call31 to i64
+  %add33 = add i64 %36, %conv32
+  %conv34 = trunc i64 %add33 to i32
+  ret i32 %conv34
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE3minEv() #2 comdat align 2 {
+entry:
+  ret i64 0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE3maxEv() #2 comdat align 2 {
+entry:
+  ret i64 4294967295
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr i32 @_ZNKSt24uniform_int_distributionIiE10param_type1bEv(%"struct.std::uniform_int_distribution<int>::param_type"* %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::uniform_int_distribution<int>::param_type"*, align 8
+  store %"struct.std::uniform_int_distribution<int>::param_type"* %this, %"struct.std::uniform_int_distribution<int>::param_type"** %this.addr, align 8
+  %this1 = load %"struct.std::uniform_int_distribution<int>::param_type"*, %"struct.std::uniform_int_distribution<int>::param_type"** %this.addr, align 8
+  %_M_b = getelementptr inbounds %"struct.std::uniform_int_distribution<int>::param_type", %"struct.std::uniform_int_distribution<int>::param_type"* %this1, i32 0, i32 1
+  %0 = load i32, i32* %_M_b, align 4
+  ret i32 %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr i32 @_ZNKSt24uniform_int_distributionIiE10param_type1aEv(%"struct.std::uniform_int_distribution<int>::param_type"* %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::uniform_int_distribution<int>::param_type"*, align 8
+  store %"struct.std::uniform_int_distribution<int>::param_type"* %this, %"struct.std::uniform_int_distribution<int>::param_type"** %this.addr, align 8
+  %this1 = load %"struct.std::uniform_int_distribution<int>::param_type"*, %"struct.std::uniform_int_distribution<int>::param_type"** %this.addr, align 8
+  %_M_a = getelementptr inbounds %"struct.std::uniform_int_distribution<int>::param_type", %"struct.std::uniform_int_distribution<int>::param_type"* %this1, i32 0, i32 0
+  %0 = load i32, i32* %_M_a, align 4
+  ret i32 %0
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEclEv(%"class.std::mersenne_twister_engine"* %this) #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::mersenne_twister_engine"*, align 8
+  %__z = alloca i64, align 8
+  store %"class.std::mersenne_twister_engine"* %this, %"class.std::mersenne_twister_engine"** %this.addr, align 8
+  %this1 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %this.addr, align 8
+  %_M_p = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 1
+  %0 = load i64, i64* %_M_p, align 8
+  %cmp = icmp uge i64 %0, 624
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  call void @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE11_M_gen_randEv(%"class.std::mersenne_twister_engine"* %this1)
+  br label %if.end
+
+if.end:                                           ; preds = %if.then, %entry
+  %_M_x = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %_M_p2 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 1
+  %1 = load i64, i64* %_M_p2, align 8
+  %inc = add i64 %1, 1
+  store i64 %inc, i64* %_M_p2, align 8
+  %arrayidx = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x, i64 0, i64 %1
+  %2 = load i64, i64* %arrayidx, align 8
+  store i64 %2, i64* %__z, align 8
+  %3 = load i64, i64* %__z, align 8
+  %shr = lshr i64 %3, 11
+  %and = and i64 %shr, 4294967295
+  %4 = load i64, i64* %__z, align 8
+  %xor = xor i64 %4, %and
+  store i64 %xor, i64* %__z, align 8
+  %5 = load i64, i64* %__z, align 8
+  %shl = shl i64 %5, 7
+  %and3 = and i64 %shl, 2636928640
+  %6 = load i64, i64* %__z, align 8
+  %xor4 = xor i64 %6, %and3
+  store i64 %xor4, i64* %__z, align 8
+  %7 = load i64, i64* %__z, align 8
+  %shl5 = shl i64 %7, 15
+  %and6 = and i64 %shl5, 4022730752
+  %8 = load i64, i64* %__z, align 8
+  %xor7 = xor i64 %8, %and6
+  store i64 %xor7, i64* %__z, align 8
+  %9 = load i64, i64* %__z, align 8
+  %shr8 = lshr i64 %9, 18
+  %10 = load i64, i64* %__z, align 8
+  %xor9 = xor i64 %10, %shr8
+  store i64 %xor9, i64* %__z, align 8
+  %11 = load i64, i64* %__z, align 8
+  ret i64 %11
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr void @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE11_M_gen_randEv(%"class.std::mersenne_twister_engine"* %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::mersenne_twister_engine"*, align 8
+  %__upper_mask = alloca i64, align 8
+  %__lower_mask = alloca i64, align 8
+  %__k = alloca i64, align 8
+  %__y = alloca i64, align 8
+  %__k12 = alloca i64, align 8
+  %__y16 = alloca i64, align 8
+  %__y39 = alloca i64, align 8
+  store %"class.std::mersenne_twister_engine"* %this, %"class.std::mersenne_twister_engine"** %this.addr, align 8
+  %this1 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %this.addr, align 8
+  store i64 -2147483648, i64* %__upper_mask, align 8
+  store i64 2147483647, i64* %__lower_mask, align 8
+  store i64 0, i64* %__k, align 8
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %0 = load i64, i64* %__k, align 8
+  %cmp = icmp ult i64 %0, 227
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %_M_x = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %1 = load i64, i64* %__k, align 8
+  %arrayidx = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x, i64 0, i64 %1
+  %2 = load i64, i64* %arrayidx, align 8
+  %and = and i64 %2, -2147483648
+  %_M_x2 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %3 = load i64, i64* %__k, align 8
+  %add = add i64 %3, 1
+  %arrayidx3 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x2, i64 0, i64 %add
+  %4 = load i64, i64* %arrayidx3, align 8
+  %and4 = and i64 %4, 2147483647
+  %or = or i64 %and, %and4
+  store i64 %or, i64* %__y, align 8
+  %_M_x5 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %5 = load i64, i64* %__k, align 8
+  %add6 = add i64 %5, 397
+  %arrayidx7 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x5, i64 0, i64 %add6
+  %6 = load i64, i64* %arrayidx7, align 8
+  %7 = load i64, i64* %__y, align 8
+  %shr = lshr i64 %7, 1
+  %xor = xor i64 %6, %shr
+  %8 = load i64, i64* %__y, align 8
+  %and8 = and i64 %8, 1
+  %tobool = icmp ne i64 %and8, 0
+  %9 = zext i1 %tobool to i64
+  %cond = select i1 %tobool, i64 2567483615, i64 0
+  %xor9 = xor i64 %xor, %cond
+  %_M_x10 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %10 = load i64, i64* %__k, align 8
+  %arrayidx11 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x10, i64 0, i64 %10
+  store i64 %xor9, i64* %arrayidx11, align 8
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %11 = load i64, i64* %__k, align 8
+  %inc = add i64 %11, 1
+  store i64 %inc, i64* %__k, align 8
+  br label %for.cond
+
+for.end:                                          ; preds = %for.cond
+  store i64 227, i64* %__k12, align 8
+  br label %for.cond13
+
+for.cond13:                                       ; preds = %for.inc36, %for.end
+  %12 = load i64, i64* %__k12, align 8
+  %cmp14 = icmp ult i64 %12, 623
+  br i1 %cmp14, label %for.body15, label %for.end38
+
+for.body15:                                       ; preds = %for.cond13
+  %_M_x17 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %13 = load i64, i64* %__k12, align 8
+  %arrayidx18 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x17, i64 0, i64 %13
+  %14 = load i64, i64* %arrayidx18, align 8
+  %and19 = and i64 %14, -2147483648
+  %_M_x20 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %15 = load i64, i64* %__k12, align 8
+  %add21 = add i64 %15, 1
+  %arrayidx22 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x20, i64 0, i64 %add21
+  %16 = load i64, i64* %arrayidx22, align 8
+  %and23 = and i64 %16, 2147483647
+  %or24 = or i64 %and19, %and23
+  store i64 %or24, i64* %__y16, align 8
+  %_M_x25 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %17 = load i64, i64* %__k12, align 8
+  %add26 = add i64 %17, -227
+  %arrayidx27 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x25, i64 0, i64 %add26
+  %18 = load i64, i64* %arrayidx27, align 8
+  %19 = load i64, i64* %__y16, align 8
+  %shr28 = lshr i64 %19, 1
+  %xor29 = xor i64 %18, %shr28
+  %20 = load i64, i64* %__y16, align 8
+  %and30 = and i64 %20, 1
+  %tobool31 = icmp ne i64 %and30, 0
+  %21 = zext i1 %tobool31 to i64
+  %cond32 = select i1 %tobool31, i64 2567483615, i64 0
+  %xor33 = xor i64 %xor29, %cond32
+  %_M_x34 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %22 = load i64, i64* %__k12, align 8
+  %arrayidx35 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x34, i64 0, i64 %22
+  store i64 %xor33, i64* %arrayidx35, align 8
+  br label %for.inc36
+
+for.inc36:                                        ; preds = %for.body15
+  %23 = load i64, i64* %__k12, align 8
+  %inc37 = add i64 %23, 1
+  store i64 %inc37, i64* %__k12, align 8
+  br label %for.cond13
+
+for.end38:                                        ; preds = %for.cond13
+  %_M_x40 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %arrayidx41 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x40, i64 0, i64 623
+  %24 = load i64, i64* %arrayidx41, align 8
+  %and42 = and i64 %24, -2147483648
+  %_M_x43 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %arrayidx44 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x43, i64 0, i64 0
+  %25 = load i64, i64* %arrayidx44, align 8
+  %and45 = and i64 %25, 2147483647
+  %or46 = or i64 %and42, %and45
+  store i64 %or46, i64* %__y39, align 8
+  %_M_x47 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %arrayidx48 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x47, i64 0, i64 396
+  %26 = load i64, i64* %arrayidx48, align 8
+  %27 = load i64, i64* %__y39, align 8
+  %shr49 = lshr i64 %27, 1
+  %xor50 = xor i64 %26, %shr49
+  %28 = load i64, i64* %__y39, align 8
+  %and51 = and i64 %28, 1
+  %tobool52 = icmp ne i64 %and51, 0
+  %29 = zext i1 %tobool52 to i64
+  %cond53 = select i1 %tobool52, i64 2567483615, i64 0
+  %xor54 = xor i64 %xor50, %cond53
+  %_M_x55 = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 0
+  %arrayidx56 = getelementptr inbounds [624 x i64], [624 x i64]* %_M_x55, i64 0, i64 623
+  store i64 %xor54, i64* %arrayidx56, align 8
+  %_M_p = getelementptr inbounds %"class.std::mersenne_twister_engine", %"class.std::mersenne_twister_engine"* %this1, i32 0, i32 1
+  store i64 0, i64* %_M_p, align 8
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define void @_Z20initializeFloatArrayPfi(float* %array, i32 %noOfDimension) #1 {
+entry:
+  %array.addr = alloca float*, align 8
+  %noOfDimension.addr = alloca i32, align 4
+  %dim = alloca i32, align 4
+  %i = alloca i32, align 4
+  %j = alloca i32, align 4
+  %k = alloca i32, align 4
+  store float* %array, float** %array.addr, align 8
+  store i32 %noOfDimension, i32* %noOfDimension.addr, align 4
+  store i32 0, i32* %dim, align 4
+  %0 = load i32, i32* %noOfDimension.addr, align 4
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([16 x i8], [16 x i8]* @.str.8, i32 0, i32 0), i32 %0)
+  %1 = load i32, i32* %noOfDimension.addr, align 4
+  switch i32 %1, label %sw.epilog [
+    i32 1, label %sw.bb
+    i32 2, label %sw.bb2
+    i32 3, label %sw.bb21
+  ]
+
+sw.bb:                                            ; preds = %entry
+  store i32 0, i32* %i, align 4
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %sw.bb
+  %2 = load i32, i32* %i, align 4
+  %3 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 0), align 16
+  %cmp = icmp slt i32 %2, %3
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %call1 = call double @_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_(%"class.std::uniform_real_distribution"* @disRealFloat, %"class.std::mersenne_twister_engine"* dereferenceable(5000) @gen)
+  %conv = fptrunc double %call1 to float
+  %4 = load float*, float** %array.addr, align 8
+  %5 = load i32, i32* %i, align 4
+  %idx.ext = sext i32 %5 to i64
+  %add.ptr = getelementptr inbounds float, float* %4, i64 %idx.ext
+  store float %conv, float* %add.ptr, align 4
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %6 = load i32, i32* %i, align 4
+  %inc = add nsw i32 %6, 1
+  store i32 %inc, i32* %i, align 4
+  br label %for.cond
+
+for.end:                                          ; preds = %for.cond
+  br label %sw.epilog
+
+sw.bb2:                                           ; preds = %entry
+  store i32 0, i32* %i, align 4
+  br label %for.cond3
+
+for.cond3:                                        ; preds = %for.inc18, %sw.bb2
+  %7 = load i32, i32* %i, align 4
+  %8 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 0), align 16
+  %cmp4 = icmp slt i32 %7, %8
+  br i1 %cmp4, label %for.body5, label %for.end20
+
+for.body5:                                        ; preds = %for.cond3
+  store i32 0, i32* %j, align 4
+  br label %for.cond6
+
+for.cond6:                                        ; preds = %for.inc15, %for.body5
+  %9 = load i32, i32* %j, align 4
+  %10 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %cmp7 = icmp slt i32 %9, %10
+  br i1 %cmp7, label %for.body8, label %for.end17
+
+for.body8:                                        ; preds = %for.cond6
+  %call9 = call double @_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_(%"class.std::uniform_real_distribution"* @disRealFloat, %"class.std::mersenne_twister_engine"* dereferenceable(5000) @gen)
+  %conv10 = fptrunc double %call9 to float
+  %11 = load float*, float** %array.addr, align 8
+  %12 = load i32, i32* %i, align 4
+  %13 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %mul = mul nsw i32 %12, %13
+  %idx.ext11 = sext i32 %mul to i64
+  %add.ptr12 = getelementptr inbounds float, float* %11, i64 %idx.ext11
+  %14 = load i32, i32* %j, align 4
+  %idx.ext13 = sext i32 %14 to i64
+  %add.ptr14 = getelementptr inbounds float, float* %add.ptr12, i64 %idx.ext13
+  store float %conv10, float* %add.ptr14, align 4
+  br label %for.inc15
+
+for.inc15:                                        ; preds = %for.body8
+  %15 = load i32, i32* %j, align 4
+  %inc16 = add nsw i32 %15, 1
+  store i32 %inc16, i32* %j, align 4
+  br label %for.cond6
+
+for.end17:                                        ; preds = %for.cond6
+  br label %for.inc18
+
+for.inc18:                                        ; preds = %for.end17
+  %16 = load i32, i32* %i, align 4
+  %inc19 = add nsw i32 %16, 1
+  store i32 %inc19, i32* %i, align 4
+  br label %for.cond3
+
+for.end20:                                        ; preds = %for.cond3
+  br label %sw.epilog
+
+sw.bb21:                                          ; preds = %entry
+  store i32 0, i32* %i, align 4
+  br label %for.cond22
+
+for.cond22:                                       ; preds = %for.inc48, %sw.bb21
+  %17 = load i32, i32* %i, align 4
+  %18 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 0), align 16
+  %cmp23 = icmp slt i32 %17, %18
+  br i1 %cmp23, label %for.body24, label %for.end50
+
+for.body24:                                       ; preds = %for.cond22
+  store i32 0, i32* %j, align 4
+  br label %for.cond25
+
+for.cond25:                                       ; preds = %for.inc45, %for.body24
+  %19 = load i32, i32* %j, align 4
+  %20 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %cmp26 = icmp slt i32 %19, %20
+  br i1 %cmp26, label %for.body27, label %for.end47
+
+for.body27:                                       ; preds = %for.cond25
+  store i32 0, i32* %k, align 4
+  br label %for.cond28
+
+for.cond28:                                       ; preds = %for.inc42, %for.body27
+  %21 = load i32, i32* %k, align 4
+  %22 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 2), align 8
+  %cmp29 = icmp slt i32 %21, %22
+  br i1 %cmp29, label %for.body30, label %for.end44
+
+for.body30:                                       ; preds = %for.cond28
+  %call31 = call double @_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_(%"class.std::uniform_real_distribution"* @disRealFloat, %"class.std::mersenne_twister_engine"* dereferenceable(5000) @gen)
+  %conv32 = fptrunc double %call31 to float
+  %23 = load float*, float** %array.addr, align 8
+  %24 = load i32, i32* %i, align 4
+  %25 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %26 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 2), align 8
+  %mul33 = mul nsw i32 %25, %26
+  %mul34 = mul nsw i32 %24, %mul33
+  %idx.ext35 = sext i32 %mul34 to i64
+  %add.ptr36 = getelementptr inbounds float, float* %23, i64 %idx.ext35
+  %27 = load i32, i32* %j, align 4
+  %28 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 2), align 8
+  %mul37 = mul nsw i32 %27, %28
+  %idx.ext38 = sext i32 %mul37 to i64
+  %add.ptr39 = getelementptr inbounds float, float* %add.ptr36, i64 %idx.ext38
+  %29 = load i32, i32* %k, align 4
+  %idx.ext40 = sext i32 %29 to i64
+  %add.ptr41 = getelementptr inbounds float, float* %add.ptr39, i64 %idx.ext40
+  store float %conv32, float* %add.ptr41, align 4
+  br label %for.inc42
+
+for.inc42:                                        ; preds = %for.body30
+  %30 = load i32, i32* %k, align 4
+  %inc43 = add nsw i32 %30, 1
+  store i32 %inc43, i32* %k, align 4
+  br label %for.cond28
+
+for.end44:                                        ; preds = %for.cond28
+  br label %for.inc45
+
+for.inc45:                                        ; preds = %for.end44
+  %31 = load i32, i32* %j, align 4
+  %inc46 = add nsw i32 %31, 1
+  store i32 %inc46, i32* %j, align 4
+  br label %for.cond25
+
+for.end47:                                        ; preds = %for.cond25
+  br label %for.inc48
+
+for.inc48:                                        ; preds = %for.end47
+  %32 = load i32, i32* %i, align 4
+  %inc49 = add nsw i32 %32, 1
+  store i32 %inc49, i32* %i, align 4
+  br label %for.cond22
+
+for.end50:                                        ; preds = %for.cond22
+  br label %sw.epilog
+
+sw.epilog:                                        ; preds = %entry, %for.end50, %for.end20, %for.end
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr double @_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_(%"class.std::uniform_real_distribution"* %this, %"class.std::mersenne_twister_engine"* dereferenceable(5000) %__urng) #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::uniform_real_distribution"*, align 8
+  %__urng.addr = alloca %"class.std::mersenne_twister_engine"*, align 8
+  store %"class.std::uniform_real_distribution"* %this, %"class.std::uniform_real_distribution"** %this.addr, align 8
+  store %"class.std::mersenne_twister_engine"* %__urng, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %this1 = load %"class.std::uniform_real_distribution"*, %"class.std::uniform_real_distribution"** %this.addr, align 8
+  %0 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %_M_param = getelementptr inbounds %"class.std::uniform_real_distribution", %"class.std::uniform_real_distribution"* %this1, i32 0, i32 0
+  %call = call double @_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_RKNS0_10param_typeE(%"class.std::uniform_real_distribution"* %this1, %"class.std::mersenne_twister_engine"* dereferenceable(5000) %0, %"struct.std::uniform_real_distribution<double>::param_type"* dereferenceable(16) %_M_param)
+  ret double %call
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr double @_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_RKNS0_10param_typeE(%"class.std::uniform_real_distribution"* %this, %"class.std::mersenne_twister_engine"* dereferenceable(5000) %__urng, %"struct.std::uniform_real_distribution<double>::param_type"* dereferenceable(16) %__p) #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"class.std::uniform_real_distribution"*, align 8
+  %__urng.addr = alloca %"class.std::mersenne_twister_engine"*, align 8
+  %__p.addr = alloca %"struct.std::uniform_real_distribution<double>::param_type"*, align 8
+  %__aurng = alloca %"struct.std::__detail::_Adaptor", align 8
+  store %"class.std::uniform_real_distribution"* %this, %"class.std::uniform_real_distribution"** %this.addr, align 8
+  store %"class.std::mersenne_twister_engine"* %__urng, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  store %"struct.std::uniform_real_distribution<double>::param_type"* %__p, %"struct.std::uniform_real_distribution<double>::param_type"** %__p.addr, align 8
+  %this1 = load %"class.std::uniform_real_distribution"*, %"class.std::uniform_real_distribution"** %this.addr, align 8
+  %0 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  call void @_ZNSt8__detail8_AdaptorISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEdEC2ERS2_(%"struct.std::__detail::_Adaptor"* %__aurng, %"class.std::mersenne_twister_engine"* dereferenceable(5000) %0)
+  %call = call double @_ZNSt8__detail8_AdaptorISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEdEclEv(%"struct.std::__detail::_Adaptor"* %__aurng)
+  %1 = load %"struct.std::uniform_real_distribution<double>::param_type"*, %"struct.std::uniform_real_distribution<double>::param_type"** %__p.addr, align 8
+  %call2 = call double @_ZNKSt25uniform_real_distributionIdE10param_type1bEv(%"struct.std::uniform_real_distribution<double>::param_type"* %1)
+  %2 = load %"struct.std::uniform_real_distribution<double>::param_type"*, %"struct.std::uniform_real_distribution<double>::param_type"** %__p.addr, align 8
+  %call3 = call double @_ZNKSt25uniform_real_distributionIdE10param_type1aEv(%"struct.std::uniform_real_distribution<double>::param_type"* %2)
+  %sub = fsub double %call2, %call3
+  %mul = fmul double %call, %sub
+  %3 = load %"struct.std::uniform_real_distribution<double>::param_type"*, %"struct.std::uniform_real_distribution<double>::param_type"** %__p.addr, align 8
+  %call4 = call double @_ZNKSt25uniform_real_distributionIdE10param_type1aEv(%"struct.std::uniform_real_distribution<double>::param_type"* %3)
+  %add = fadd double %mul, %call4
+  ret double %add
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr void @_ZNSt8__detail8_AdaptorISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEdEC2ERS2_(%"struct.std::__detail::_Adaptor"* %this, %"class.std::mersenne_twister_engine"* dereferenceable(5000) %__g) unnamed_addr #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::__detail::_Adaptor"*, align 8
+  %__g.addr = alloca %"class.std::mersenne_twister_engine"*, align 8
+  store %"struct.std::__detail::_Adaptor"* %this, %"struct.std::__detail::_Adaptor"** %this.addr, align 8
+  store %"class.std::mersenne_twister_engine"* %__g, %"class.std::mersenne_twister_engine"** %__g.addr, align 8
+  %this1 = load %"struct.std::__detail::_Adaptor"*, %"struct.std::__detail::_Adaptor"** %this.addr, align 8
+  %_M_g = getelementptr inbounds %"struct.std::__detail::_Adaptor", %"struct.std::__detail::_Adaptor"* %this1, i32 0, i32 0
+  %0 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__g.addr, align 8
+  store %"class.std::mersenne_twister_engine"* %0, %"class.std::mersenne_twister_engine"** %_M_g, align 8
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr double @_ZNSt8__detail8_AdaptorISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEdEclEv(%"struct.std::__detail::_Adaptor"* %this) #1 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::__detail::_Adaptor"*, align 8
+  store %"struct.std::__detail::_Adaptor"* %this, %"struct.std::__detail::_Adaptor"** %this.addr, align 8
+  %this1 = load %"struct.std::__detail::_Adaptor"*, %"struct.std::__detail::_Adaptor"** %this.addr, align 8
+  %_M_g = getelementptr inbounds %"struct.std::__detail::_Adaptor", %"struct.std::__detail::_Adaptor"* %this1, i32 0, i32 0
+  %ref = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %_M_g, align 8
+  %call = call double @_ZSt18generate_canonicalIdLm53ESt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEET_RT1_(%"class.std::mersenne_twister_engine"* dereferenceable(5000) %ref)
+  ret double %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr double @_ZNKSt25uniform_real_distributionIdE10param_type1bEv(%"struct.std::uniform_real_distribution<double>::param_type"* %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::uniform_real_distribution<double>::param_type"*, align 8
+  store %"struct.std::uniform_real_distribution<double>::param_type"* %this, %"struct.std::uniform_real_distribution<double>::param_type"** %this.addr, align 8
+  %this1 = load %"struct.std::uniform_real_distribution<double>::param_type"*, %"struct.std::uniform_real_distribution<double>::param_type"** %this.addr, align 8
+  %_M_b = getelementptr inbounds %"struct.std::uniform_real_distribution<double>::param_type", %"struct.std::uniform_real_distribution<double>::param_type"* %this1, i32 0, i32 1
+  %0 = load double, double* %_M_b, align 8
+  ret double %0
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr double @_ZNKSt25uniform_real_distributionIdE10param_type1aEv(%"struct.std::uniform_real_distribution<double>::param_type"* %this) #2 comdat align 2 {
+entry:
+  %this.addr = alloca %"struct.std::uniform_real_distribution<double>::param_type"*, align 8
+  store %"struct.std::uniform_real_distribution<double>::param_type"* %this, %"struct.std::uniform_real_distribution<double>::param_type"** %this.addr, align 8
+  %this1 = load %"struct.std::uniform_real_distribution<double>::param_type"*, %"struct.std::uniform_real_distribution<double>::param_type"** %this.addr, align 8
+  %_M_a = getelementptr inbounds %"struct.std::uniform_real_distribution<double>::param_type", %"struct.std::uniform_real_distribution<double>::param_type"* %this1, i32 0, i32 0
+  %0 = load double, double* %_M_a, align 8
+  ret double %0
+}
+
+; Function Attrs: noinline optnone uwtable
+define linkonce_odr double @_ZSt18generate_canonicalIdLm53ESt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEET_RT1_(%"class.std::mersenne_twister_engine"* dereferenceable(5000) %__urng) #1 comdat {
+entry:
+  %__urng.addr = alloca %"class.std::mersenne_twister_engine"*, align 8
+  %__b = alloca i64, align 8
+  %ref.tmp = alloca i64, align 8
+  %ref.tmp1 = alloca i64, align 8
+  %__r = alloca x86_fp80, align 16
+  %__log2r = alloca i64, align 8
+  %__k = alloca i64, align 8
+  %ref.tmp8 = alloca i64, align 8
+  %ref.tmp9 = alloca i64, align 8
+  %__sum = alloca double, align 8
+  %__tmp = alloca double, align 8
+  store %"class.std::mersenne_twister_engine"* %__urng, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  store i64 53, i64* %ref.tmp, align 8
+  store i64 53, i64* %ref.tmp1, align 8
+  %call = call dereferenceable(8) i64* @_ZSt3minImERKT_S2_S2_(i64* dereferenceable(8) %ref.tmp, i64* dereferenceable(8) %ref.tmp1)
+  %0 = load i64, i64* %call, align 8
+  store i64 %0, i64* %__b, align 8
+  %1 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %call2 = call i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE3maxEv()
+  %conv = uitofp i64 %call2 to x86_fp80
+  %2 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %call3 = call i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE3minEv()
+  %conv4 = uitofp i64 %call3 to x86_fp80
+  %sub = fsub x86_fp80 %conv, %conv4
+  %add = fadd x86_fp80 %sub, 0xK3FFF8000000000000000
+  store x86_fp80 %add, x86_fp80* %__r, align 16
+  %3 = load x86_fp80, x86_fp80* %__r, align 16
+  %call5 = call x86_fp80 @_ZSt3loge(x86_fp80 %3)
+  %call6 = call x86_fp80 @_ZSt3loge(x86_fp80 0xK40008000000000000000)
+  %div = fdiv x86_fp80 %call5, %call6
+  %conv7 = fptoui x86_fp80 %div to i64
+  store i64 %conv7, i64* %__log2r, align 8
+  store i64 1, i64* %ref.tmp8, align 8
+  %4 = load i64, i64* %__b, align 8
+  %5 = load i64, i64* %__log2r, align 8
+  %add10 = add i64 %4, %5
+  %sub11 = sub i64 %add10, 1
+  %6 = load i64, i64* %__log2r, align 8
+  %div12 = udiv i64 %sub11, %6
+  store i64 %div12, i64* %ref.tmp9, align 8
+  %call13 = call dereferenceable(8) i64* @_ZSt3maxImERKT_S2_S2_(i64* dereferenceable(8) %ref.tmp8, i64* dereferenceable(8) %ref.tmp9)
+  %7 = load i64, i64* %call13, align 8
+  store i64 %7, i64* %__k, align 8
+  store double 0.000000e+00, double* %__sum, align 8
+  store double 1.000000e+00, double* %__tmp, align 8
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %entry
+  %8 = load i64, i64* %__k, align 8
+  %cmp = icmp ne i64 %8, 0
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %9 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %call14 = call i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEclEv(%"class.std::mersenne_twister_engine"* %9)
+  %10 = load %"class.std::mersenne_twister_engine"*, %"class.std::mersenne_twister_engine"** %__urng.addr, align 8
+  %call15 = call i64 @_ZNSt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EE3minEv()
+  %sub16 = sub i64 %call14, %call15
+  %conv17 = uitofp i64 %sub16 to double
+  %11 = load double, double* %__tmp, align 8
+  %mul = fmul double %conv17, %11
+  %12 = load double, double* %__sum, align 8
+  %add18 = fadd double %12, %mul
+  store double %add18, double* %__sum, align 8
+  %13 = load x86_fp80, x86_fp80* %__r, align 16
+  %14 = load double, double* %__tmp, align 8
+  %conv19 = fpext double %14 to x86_fp80
+  %mul20 = fmul x86_fp80 %conv19, %13
+  %conv21 = fptrunc x86_fp80 %mul20 to double
+  store double %conv21, double* %__tmp, align 8
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %15 = load i64, i64* %__k, align 8
+  %dec = add i64 %15, -1
+  store i64 %dec, i64* %__k, align 8
+  br label %for.cond
+
+for.end:                                          ; preds = %for.cond
+  %16 = load double, double* %__sum, align 8
+  %17 = load double, double* %__tmp, align 8
+  %div22 = fdiv double %16, %17
+  ret double %div22
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dereferenceable(8) i64* @_ZSt3minImERKT_S2_S2_(i64* dereferenceable(8) %__a, i64* dereferenceable(8) %__b) #2 comdat {
+entry:
+  %retval = alloca i64*, align 8
+  %__a.addr = alloca i64*, align 8
+  %__b.addr = alloca i64*, align 8
+  store i64* %__a, i64** %__a.addr, align 8
+  store i64* %__b, i64** %__b.addr, align 8
+  %0 = load i64*, i64** %__b.addr, align 8
+  %1 = load i64, i64* %0, align 8
+  %2 = load i64*, i64** %__a.addr, align 8
+  %3 = load i64, i64* %2, align 8
+  %cmp = icmp ult i64 %1, %3
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  %4 = load i64*, i64** %__b.addr, align 8
+  store i64* %4, i64** %retval, align 8
+  br label %return
+
+if.end:                                           ; preds = %entry
+  %5 = load i64*, i64** %__a.addr, align 8
+  store i64* %5, i64** %retval, align 8
+  br label %return
+
+return:                                           ; preds = %if.end, %if.then
+  %6 = load i64*, i64** %retval, align 8
+  ret i64* %6
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr x86_fp80 @_ZSt3loge(x86_fp80 %__x) #2 comdat {
+entry:
+  %__x.addr = alloca x86_fp80, align 16
+  store x86_fp80 %__x, x86_fp80* %__x.addr, align 16
+  %0 = load x86_fp80, x86_fp80* %__x.addr, align 16
+  %call = call x86_fp80 @logl(x86_fp80 %0) #11
+  ret x86_fp80 %call
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define linkonce_odr dereferenceable(8) i64* @_ZSt3maxImERKT_S2_S2_(i64* dereferenceable(8) %__a, i64* dereferenceable(8) %__b) #2 comdat {
+entry:
+  %retval = alloca i64*, align 8
+  %__a.addr = alloca i64*, align 8
+  %__b.addr = alloca i64*, align 8
+  store i64* %__a, i64** %__a.addr, align 8
+  store i64* %__b, i64** %__b.addr, align 8
+  %0 = load i64*, i64** %__a.addr, align 8
+  %1 = load i64, i64* %0, align 8
+  %2 = load i64*, i64** %__b.addr, align 8
+  %3 = load i64, i64* %2, align 8
+  %cmp = icmp ult i64 %1, %3
+  br i1 %cmp, label %if.then, label %if.end
+
+if.then:                                          ; preds = %entry
+  %4 = load i64*, i64** %__b.addr, align 8
+  store i64* %4, i64** %retval, align 8
+  br label %return
+
+if.end:                                           ; preds = %entry
+  %5 = load i64*, i64** %__a.addr, align 8
+  store i64* %5, i64** %retval, align 8
+  br label %return
+
+return:                                           ; preds = %if.end, %if.then
+  %6 = load i64*, i64** %retval, align 8
+  ret i64* %6
+}
+
+; Function Attrs: nounwind readnone
+declare x86_fp80 @logl(x86_fp80) #7
+
+; Function Attrs: noinline optnone uwtable
+define void @_Z21initializeDoubleArrayPdi(double* %array, i32 %noOfDimension) #1 {
+entry:
+  %array.addr = alloca double*, align 8
+  %noOfDimension.addr = alloca i32, align 4
+  %dim = alloca i32, align 4
+  %i = alloca i32, align 4
+  %j = alloca i32, align 4
+  %k = alloca i32, align 4
+  store double* %array, double** %array.addr, align 8
+  store i32 %noOfDimension, i32* %noOfDimension.addr, align 4
+  store i32 0, i32* %dim, align 4
+  %0 = load i32, i32* %noOfDimension.addr, align 4
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([16 x i8], [16 x i8]* @.str.8, i32 0, i32 0), i32 %0)
+  %1 = load i32, i32* %noOfDimension.addr, align 4
+  switch i32 %1, label %sw.epilog [
+    i32 1, label %sw.bb
+    i32 2, label %sw.bb2
+    i32 3, label %sw.bb20
+  ]
+
+sw.bb:                                            ; preds = %entry
+  store i32 0, i32* %i, align 4
+  br label %for.cond
+
+for.cond:                                         ; preds = %for.inc, %sw.bb
+  %2 = load i32, i32* %i, align 4
+  %3 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 0), align 16
+  %cmp = icmp slt i32 %2, %3
+  br i1 %cmp, label %for.body, label %for.end
+
+for.body:                                         ; preds = %for.cond
+  %call1 = call double @_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_(%"class.std::uniform_real_distribution"* @disRealDouble, %"class.std::mersenne_twister_engine"* dereferenceable(5000) @gen)
+  %4 = load double*, double** %array.addr, align 8
+  %5 = load i32, i32* %i, align 4
+  %idx.ext = sext i32 %5 to i64
+  %add.ptr = getelementptr inbounds double, double* %4, i64 %idx.ext
+  store double %call1, double* %add.ptr, align 8
+  br label %for.inc
+
+for.inc:                                          ; preds = %for.body
+  %6 = load i32, i32* %i, align 4
+  %inc = add nsw i32 %6, 1
+  store i32 %inc, i32* %i, align 4
+  br label %for.cond
+
+for.end:                                          ; preds = %for.cond
+  br label %sw.epilog
+
+sw.bb2:                                           ; preds = %entry
+  store i32 0, i32* %i, align 4
+  br label %for.cond3
+
+for.cond3:                                        ; preds = %for.inc17, %sw.bb2
+  %7 = load i32, i32* %i, align 4
+  %8 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 0), align 16
+  %cmp4 = icmp slt i32 %7, %8
+  br i1 %cmp4, label %for.body5, label %for.end19
+
+for.body5:                                        ; preds = %for.cond3
+  store i32 0, i32* %j, align 4
+  br label %for.cond6
+
+for.cond6:                                        ; preds = %for.inc14, %for.body5
+  %9 = load i32, i32* %j, align 4
+  %10 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %cmp7 = icmp slt i32 %9, %10
+  br i1 %cmp7, label %for.body8, label %for.end16
+
+for.body8:                                        ; preds = %for.cond6
+  %call9 = call double @_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_(%"class.std::uniform_real_distribution"* @disRealDouble, %"class.std::mersenne_twister_engine"* dereferenceable(5000) @gen)
+  %11 = load double*, double** %array.addr, align 8
+  %12 = load i32, i32* %i, align 4
+  %13 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %mul = mul nsw i32 %12, %13
+  %idx.ext10 = sext i32 %mul to i64
+  %add.ptr11 = getelementptr inbounds double, double* %11, i64 %idx.ext10
+  %14 = load i32, i32* %j, align 4
+  %idx.ext12 = sext i32 %14 to i64
+  %add.ptr13 = getelementptr inbounds double, double* %add.ptr11, i64 %idx.ext12
+  store double %call9, double* %add.ptr13, align 8
+  br label %for.inc14
+
+for.inc14:                                        ; preds = %for.body8
+  %15 = load i32, i32* %j, align 4
+  %inc15 = add nsw i32 %15, 1
+  store i32 %inc15, i32* %j, align 4
+  br label %for.cond6
+
+for.end16:                                        ; preds = %for.cond6
+  br label %for.inc17
+
+for.inc17:                                        ; preds = %for.end16
+  %16 = load i32, i32* %i, align 4
+  %inc18 = add nsw i32 %16, 1
+  store i32 %inc18, i32* %i, align 4
+  br label %for.cond3
+
+for.end19:                                        ; preds = %for.cond3
+  br label %sw.epilog
+
+sw.bb20:                                          ; preds = %entry
+  store i32 0, i32* %i, align 4
+  br label %for.cond21
+
+for.cond21:                                       ; preds = %for.inc46, %sw.bb20
+  %17 = load i32, i32* %i, align 4
+  %18 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 0), align 16
+  %cmp22 = icmp slt i32 %17, %18
+  br i1 %cmp22, label %for.body23, label %for.end48
+
+for.body23:                                       ; preds = %for.cond21
+  store i32 0, i32* %j, align 4
+  br label %for.cond24
+
+for.cond24:                                       ; preds = %for.inc43, %for.body23
+  %19 = load i32, i32* %j, align 4
+  %20 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %cmp25 = icmp slt i32 %19, %20
+  br i1 %cmp25, label %for.body26, label %for.end45
+
+for.body26:                                       ; preds = %for.cond24
+  store i32 0, i32* %k, align 4
+  br label %for.cond27
+
+for.cond27:                                       ; preds = %for.inc40, %for.body26
+  %21 = load i32, i32* %k, align 4
+  %22 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 2), align 8
+  %cmp28 = icmp slt i32 %21, %22
+  br i1 %cmp28, label %for.body29, label %for.end42
+
+for.body29:                                       ; preds = %for.cond27
+  %call30 = call double @_ZNSt25uniform_real_distributionIdEclISt23mersenne_twister_engineImLm32ELm624ELm397ELm31ELm2567483615ELm11ELm4294967295ELm7ELm2636928640ELm15ELm4022730752ELm18ELm1812433253EEEEdRT_(%"class.std::uniform_real_distribution"* @disRealDouble, %"class.std::mersenne_twister_engine"* dereferenceable(5000) @gen)
+  %23 = load double*, double** %array.addr, align 8
+  %24 = load i32, i32* %i, align 4
+  %25 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 1), align 4
+  %26 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 2), align 8
+  %mul31 = mul nsw i32 %25, %26
+  %mul32 = mul nsw i32 %24, %mul31
+  %idx.ext33 = sext i32 %mul32 to i64
+  %add.ptr34 = getelementptr inbounds double, double* %23, i64 %idx.ext33
+  %27 = load i32, i32* %j, align 4
+  %28 = load i32, i32* getelementptr inbounds ([4 x i32], [4 x i32]* @globalDimensionArray, i64 0, i64 2), align 8
+  %mul35 = mul nsw i32 %27, %28
+  %idx.ext36 = sext i32 %mul35 to i64
+  %add.ptr37 = getelementptr inbounds double, double* %add.ptr34, i64 %idx.ext36
+  %29 = load i32, i32* %k, align 4
+  %idx.ext38 = sext i32 %29 to i64
+  %add.ptr39 = getelementptr inbounds double, double* %add.ptr37, i64 %idx.ext38
+  store double %call30, double* %add.ptr39, align 8
+  br label %for.inc40
+
+for.inc40:                                        ; preds = %for.body29
+  %30 = load i32, i32* %k, align 4
+  %inc41 = add nsw i32 %30, 1
+  store i32 %inc41, i32* %k, align 4
+  br label %for.cond27
+
+for.end42:                                        ; preds = %for.cond27
+  br label %for.inc43
+
+for.inc43:                                        ; preds = %for.end42
+  %31 = load i32, i32* %j, align 4
+  %inc44 = add nsw i32 %31, 1
+  store i32 %inc44, i32* %j, align 4
+  br label %for.cond24
+
+for.end45:                                        ; preds = %for.cond24
+  br label %for.inc46
+
+for.inc46:                                        ; preds = %for.end45
+  %32 = load i32, i32* %i, align 4
+  %inc47 = add nsw i32 %32, 1
+  store i32 %inc47, i32* %i, align 4
+  br label %for.cond21
+
+for.end48:                                        ; preds = %for.cond21
+  br label %sw.epilog
+
+sw.epilog:                                        ; preds = %entry, %for.end48, %for.end19, %for.end
+  ret void
+}
+
+; Function Attrs: noinline optnone uwtable
+define void @_Z5PRINTv() #1 {
+entry:
+  %call = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([32 x i8], [32 x i8]* @.str.9, i32 0, i32 0))
+  %0 = load i32, i32* @loadCounter, align 4
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @.str.10, i32 0, i32 0), i32 %0)
+  %1 = load i32, i32* @storeCounter, align 4
+  %call2 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([16 x i8], [16 x i8]* @.str.11, i32 0, i32 0), i32 %1)
+  ret void
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define void @_Z5SRANDv() #2 {
+entry:
+  %call = call i64 @time(i64* null) #5
+  %conv = trunc i64 %call to i32
+  call void @srand(i32 %conv) #5
+  ret void
+}
+
+; Function Attrs: nounwind
+declare i64 @time(i64*) #4
+
+; Function Attrs: nounwind
+declare void @srand(i32) #4
+
+; Function Attrs: noinline nounwind optnone uwtable
+define signext i8 @_Z5hellov() #2 !dbg !7 {
+entry:
+  %c = alloca i8, align 1
+  %a = alloca i16, align 2
+  %b = alloca i32, align 4
+  call void @llvm.dbg.declare(metadata i8* %c, metadata !11, metadata !12), !dbg !13
+  store i8 97, i8* %c, align 1, !dbg !13
+  call void @llvm.dbg.declare(metadata i16* %a, metadata !14, metadata !12), !dbg !16
+  store i16 10, i16* %a, align 2, !dbg !16
+  call void @llvm.dbg.declare(metadata i32* %b, metadata !17, metadata !12), !dbg !19
+  store i32 20, i32* %b, align 4, !dbg !19
+  %0 = load i8, i8* %c, align 1, !dbg !20
+  ret i8 %0, !dbg !21
+}
+
+; Function Attrs: nounwind readnone speculatable
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #8
+
+; Function Attrs: noinline norecurse optnone uwtable
+define i32 @main() #9 !dbg !22 {
+entry:
+  %res = alloca i8, align 1
+  call void @llvm.dbg.declare(metadata i8* %res, metadata !25, metadata !12), !dbg !26
+  %call = call signext i8 @_Z5hellov(), !dbg !27
+  store i8 %call, i8* %res, align 1, !dbg !26
+  %0 = load i8, i8* %res, align 1, !dbg !28
+  %conv = sext i8 %0 to i32, !dbg !28
+  %call1 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x i8]* @.str.1, i32 0, i32 0), i32 %conv), !dbg !29
+  ret i32 0, !dbg !30
+}
+
+attributes #0 = { noinline uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { noinline optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #4 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #5 = { nounwind }
+attributes #6 = { noinline noreturn nounwind }
+attributes #7 = { nounwind readnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #8 = { nounwind readnone speculatable }
+attributes #9 = { noinline norecurse optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #10 = { noreturn nounwind }
+attributes #11 = { nounwind readnone }
+
+!llvm.ident = !{!0, !0}
+!llvm.module.flags = !{!1, !2, !3}
+!llvm.dbg.cu = !{!4}
+
+!0 = !{!"clang version 5.0.0 (tags/RELEASE_500/final)"}
+!1 = !{i32 1, !"wchar_size", i32 4}
+!2 = !{i32 2, !"Dwarf Version", i32 4}
+!3 = !{i32 2, !"Debug Info Version", i32 3}
+!4 = distinct !DICompileUnit(language: DW_LANG_C_plus_plus, file: !5, producer: "clang version 5.0.0 (tags/RELEASE_500/final)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !6)
+!5 = !DIFile(filename: "hello.c", directory: "/home/bernard/Workspace/Workplace/work-4/bayesiansensitivityanalysis/ErrorInjector/apps")
+!6 = !{}
+!7 = distinct !DISubprogram(name: "hello", linkageName: "_Z5hellov", scope: !5, file: !5, line: 2, type: !8, isLocal: false, isDefinition: true, scopeLine: 2, flags: DIFlagPrototyped, isOptimized: false, unit: !4, variables: !6)
+!8 = !DISubroutineType(types: !9)
+!9 = !{!10}
+!10 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!11 = !DILocalVariable(name: "c", scope: !7, file: !5, line: 3, type: !10)
+!12 = !DIExpression()
+!13 = !DILocation(line: 3, column: 10, scope: !7)
+!14 = !DILocalVariable(name: "a", scope: !7, file: !5, line: 4, type: !15)
+!15 = !DIBasicType(name: "short", size: 16, encoding: DW_ATE_signed)
+!16 = !DILocation(line: 4, column: 15, scope: !7)
+!17 = !DILocalVariable(name: "b", scope: !7, file: !5, line: 5, type: !18)
+!18 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!19 = !DILocation(line: 5, column: 9, scope: !7)
+!20 = !DILocation(line: 7, column: 12, scope: !7)
+!21 = !DILocation(line: 7, column: 5, scope: !7)
+!22 = distinct !DISubprogram(name: "main", scope: !5, file: !5, line: 9, type: !23, isLocal: false, isDefinition: true, scopeLine: 9, flags: DIFlagPrototyped, isOptimized: false, unit: !4, variables: !6)
+!23 = !DISubroutineType(types: !24)
+!24 = !{!18}
+!25 = !DILocalVariable(name: "res", scope: !22, file: !5, line: 10, type: !10)
+!26 = !DILocation(line: 10, column: 10, scope: !22)
+!27 = !DILocation(line: 10, column: 14, scope: !22)
+!28 = !DILocation(line: 11, column: 21, scope: !22)
+!29 = !DILocation(line: 11, column: 5, scope: !22)
+!30 = !DILocation(line: 12, column: 1, scope: !22)

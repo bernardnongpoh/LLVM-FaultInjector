@@ -1,0 +1,10 @@
+<variable functionName="hello" variableName="a"/>
+<variable functionName="hello" variableName="b"/>
+<variable functionName="hello" variableName="c"/>
+<variable functionName="passParam" variableName="aParam"/>
+<variable functionName="passParam" variableName="aPointer"/>
+<variable functionName="dependency" variableName="a"/>
+<variable functionName="dependency" variableName="b"/>
+<variable functionName="main" variableName="argc"/>
+<variable functionName="main" variableName="argv"/>
+<variable functionName="main" variableName="res"/>

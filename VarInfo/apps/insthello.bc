@@ -1,0 +1,215 @@
+; ModuleID = 'llvm-link'
+source_filename = "llvm-link"
+target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+@global = global i32 0, align 4, !dbg !0
+@.str = private unnamed_addr constant [12 x i8] c"\0AResult =%d\00", align 1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define i32 @_Z5hellov() #0 !dbg !11 {
+entry:
+  %a = alloca i32, align 4
+  %b = alloca i32, align 4
+  %c = alloca i32, align 4
+  call void @llvm.dbg.declare(metadata i32* %a, metadata !14, metadata !15), !dbg !16
+  store i32 3, i32* %a, align 4, !dbg !16
+  call void @llvm.dbg.declare(metadata i32* %b, metadata !17, metadata !15), !dbg !18
+  store i32 10, i32* %b, align 4, !dbg !18
+  call void @llvm.dbg.declare(metadata i32* %c, metadata !19, metadata !15), !dbg !20
+  store i32 20, i32* %c, align 4, !dbg !20
+  %0 = load i32, i32* %c, align 4, !dbg !21
+  %1 = load i32, i32* %b, align 4, !dbg !22
+  %add = add nsw i32 %0, %1, !dbg !23
+  store i32 %add, i32* %a, align 4, !dbg !24
+  %2 = load i32, i32* %a, align 4, !dbg !25
+  ret i32 %2, !dbg !26
+}
+
+; Function Attrs: nounwind readnone speculatable
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define i32 @_Z9passParamiPi(i32 %aParam, i32* %aPointer) #0 !dbg !27 {
+entry:
+  %aParam.addr = alloca i32, align 4
+  %aPointer.addr = alloca i32*, align 8
+  store i32 %aParam, i32* %aParam.addr, align 4
+  call void @llvm.dbg.declare(metadata i32* %aParam.addr, metadata !31, metadata !15), !dbg !32
+  store i32* %aPointer, i32** %aPointer.addr, align 8
+  call void @llvm.dbg.declare(metadata i32** %aPointer.addr, metadata !33, metadata !15), !dbg !34
+  %0 = load i32, i32* %aParam.addr, align 4, !dbg !35
+  %add = add nsw i32 %0, 1, !dbg !36
+  store i32 %add, i32* %aParam.addr, align 4, !dbg !37
+  %1 = load i32*, i32** %aPointer.addr, align 8, !dbg !38
+  %2 = load i32, i32* %1, align 4, !dbg !39
+  %add1 = add nsw i32 %2, 1, !dbg !40
+  %3 = load i32*, i32** %aPointer.addr, align 8, !dbg !41
+  store i32 %add1, i32* %3, align 4, !dbg !42
+  %4 = load i32, i32* %aParam.addr, align 4, !dbg !43
+  ret i32 %4, !dbg !44
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define i32 @_Z10dependencyv() #0 !dbg !45 {
+entry:
+  %a = alloca i32, align 4
+  %b = alloca i32, align 4
+  call void @llvm.dbg.declare(metadata i32* %a, metadata !46, metadata !15), !dbg !47
+  store i32 10, i32* %a, align 4, !dbg !48
+  call void @llvm.dbg.declare(metadata i32* %b, metadata !49, metadata !15), !dbg !50
+  store i32 20, i32* %b, align 4, !dbg !50
+  %0 = load i32, i32* %b, align 4, !dbg !51
+  %cmp = icmp eq i32 %0, 20, !dbg !53
+  br i1 %cmp, label %if.then, label %if.else, !dbg !54
+
+if.then:                                          ; preds = %entry
+  %1 = load i32, i32* %a, align 4, !dbg !55
+  %add = add nsw i32 %1, 1, !dbg !57
+  store i32 %add, i32* %a, align 4, !dbg !58
+  br label %if.end, !dbg !59
+
+if.else:                                          ; preds = %entry
+  %2 = load i32, i32* %a, align 4, !dbg !60
+  %add1 = add nsw i32 %2, 2, !dbg !62
+  store i32 %add1, i32* %a, align 4, !dbg !63
+  br label %if.end
+
+if.end:                                           ; preds = %if.else, %if.then
+  %3 = load i32, i32* %a, align 4, !dbg !64
+  %call = call i32 @_Z9passParamiPi(i32 %3, i32* %a), !dbg !65
+  %4 = load i32, i32* %a, align 4, !dbg !66
+  ret i32 %4, !dbg !67
+}
+
+; Function Attrs: noinline norecurse optnone uwtable
+define i32 @main(i32 %argc, i8** %argv) #2 !dbg !68 {
+entry:
+  %retval = alloca i32, align 4
+  %argc.addr = alloca i32, align 4
+  %argv.addr = alloca i8**, align 8
+  %res = alloca i32, align 4
+  store i32 0, i32* %retval, align 4
+  store i32 %argc, i32* %argc.addr, align 4
+  call void @llvm.dbg.declare(metadata i32* %argc.addr, metadata !75, metadata !15), !dbg !76
+  store i8** %argv, i8*** %argv.addr, align 8
+  call void @llvm.dbg.declare(metadata i8*** %argv.addr, metadata !77, metadata !15), !dbg !78
+  %call = call i64 @time(i64* null) #5, !dbg !79
+  %conv = trunc i64 %call to i32, !dbg !79
+  call void @srand(i32 %conv) #5, !dbg !80
+  call void @llvm.dbg.declare(metadata i32* %res, metadata !81, metadata !15), !dbg !82
+  %call1 = call i32 @_Z5hellov(), !dbg !83
+  store i32 %call1, i32* %res, align 4, !dbg !82
+  %call2 = call i32 @_Z10dependencyv(), !dbg !84
+  %0 = load i32, i32* %res, align 4, !dbg !85
+  %call3 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str, i32 0, i32 0), i32 %0), !dbg !86
+  ret i32 0, !dbg !87
+}
+
+; Function Attrs: nounwind
+declare i64 @time(i64*) #3
+
+; Function Attrs: nounwind
+declare void @srand(i32) #3
+
+declare i32 @printf(i8*, ...) #4
+
+attributes #0 = { noinline nounwind optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { nounwind readnone speculatable }
+attributes #2 = { noinline norecurse optnone uwtable "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #4 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+fxsr,+mmx,+sse,+sse2,+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #5 = { nounwind }
+
+!llvm.dbg.cu = !{!2}
+!llvm.ident = !{!7}
+!llvm.module.flags = !{!8, !9, !10}
+
+!0 = !DIGlobalVariableExpression(var: !1)
+!1 = distinct !DIGlobalVariable(name: "global", scope: !2, file: !3, line: 4, type: !6, isLocal: false, isDefinition: true)
+!2 = distinct !DICompileUnit(language: DW_LANG_C_plus_plus, file: !3, producer: "clang version 5.0.0 (tags/RELEASE_500/final)", isOptimized: false, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, globals: !5)
+!3 = !DIFile(filename: "hello.c", directory: "/home/bernard/Workspace/Project-LLVM/Bayes/VarInfo/apps")
+!4 = !{}
+!5 = !{!0}
+!6 = !DIBasicType(name: "int", size: 32, encoding: DW_ATE_signed)
+!7 = !{!"clang version 5.0.0 (tags/RELEASE_500/final)"}
+!8 = !{i32 2, !"Dwarf Version", i32 4}
+!9 = !{i32 2, !"Debug Info Version", i32 3}
+!10 = !{i32 1, !"wchar_size", i32 4}
+!11 = distinct !DISubprogram(name: "hello", linkageName: "_Z5hellov", scope: !3, file: !3, line: 5, type: !12, isLocal: false, isDefinition: true, scopeLine: 5, flags: DIFlagPrototyped, isOptimized: false, unit: !2, variables: !4)
+!12 = !DISubroutineType(types: !13)
+!13 = !{!6}
+!14 = !DILocalVariable(name: "a", scope: !11, file: !3, line: 6, type: !6)
+!15 = !DIExpression()
+!16 = !DILocation(line: 6, column: 6, scope: !11)
+!17 = !DILocalVariable(name: "b", scope: !11, file: !3, line: 7, type: !6)
+!18 = !DILocation(line: 7, column: 9, scope: !11)
+!19 = !DILocalVariable(name: "c", scope: !11, file: !3, line: 8, type: !6)
+!20 = !DILocation(line: 8, column: 9, scope: !11)
+!21 = !DILocation(line: 9, column: 7, scope: !11)
+!22 = !DILocation(line: 9, column: 9, scope: !11)
+!23 = !DILocation(line: 9, column: 8, scope: !11)
+!24 = !DILocation(line: 9, column: 6, scope: !11)
+!25 = !DILocation(line: 10, column: 12, scope: !11)
+!26 = !DILocation(line: 10, column: 5, scope: !11)
+!27 = distinct !DISubprogram(name: "passParam", linkageName: "_Z9passParamiPi", scope: !3, file: !3, line: 13, type: !28, isLocal: false, isDefinition: true, scopeLine: 13, flags: DIFlagPrototyped, isOptimized: false, unit: !2, variables: !4)
+!28 = !DISubroutineType(types: !29)
+!29 = !{!6, !6, !30}
+!30 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !6, size: 64)
+!31 = !DILocalVariable(name: "aParam", arg: 1, scope: !27, file: !3, line: 13, type: !6)
+!32 = !DILocation(line: 13, column: 19, scope: !27)
+!33 = !DILocalVariable(name: "aPointer", arg: 2, scope: !27, file: !3, line: 13, type: !30)
+!34 = !DILocation(line: 13, column: 31, scope: !27)
+!35 = !DILocation(line: 15, column: 13, scope: !27)
+!36 = !DILocation(line: 15, column: 19, scope: !27)
+!37 = !DILocation(line: 15, column: 12, scope: !27)
+!38 = !DILocation(line: 16, column: 16, scope: !27)
+!39 = !DILocation(line: 16, column: 15, scope: !27)
+!40 = !DILocation(line: 16, column: 24, scope: !27)
+!41 = !DILocation(line: 16, column: 6, scope: !27)
+!42 = !DILocation(line: 16, column: 14, scope: !27)
+!43 = !DILocation(line: 17, column: 12, scope: !27)
+!44 = !DILocation(line: 17, column: 5, scope: !27)
+!45 = distinct !DISubprogram(name: "dependency", linkageName: "_Z10dependencyv", scope: !3, file: !3, line: 21, type: !12, isLocal: false, isDefinition: true, scopeLine: 21, flags: DIFlagPrototyped, isOptimized: false, unit: !2, variables: !4)
+!46 = !DILocalVariable(name: "a", scope: !45, file: !3, line: 22, type: !6)
+!47 = !DILocation(line: 22, column: 9, scope: !45)
+!48 = !DILocation(line: 23, column: 6, scope: !45)
+!49 = !DILocalVariable(name: "b", scope: !45, file: !3, line: 24, type: !6)
+!50 = !DILocation(line: 24, column: 9, scope: !45)
+!51 = !DILocation(line: 25, column: 8, scope: !52)
+!52 = distinct !DILexicalBlock(scope: !45, file: !3, line: 25, column: 8)
+!53 = !DILocation(line: 25, column: 9, scope: !52)
+!54 = !DILocation(line: 25, column: 8, scope: !45)
+!55 = !DILocation(line: 26, column: 11, scope: !56)
+!56 = distinct !DILexicalBlock(scope: !52, file: !3, line: 25, column: 14)
+!57 = !DILocation(line: 26, column: 12, scope: !56)
+!58 = !DILocation(line: 26, column: 10, scope: !56)
+!59 = !DILocation(line: 27, column: 5, scope: !56)
+!60 = !DILocation(line: 29, column: 11, scope: !61)
+!61 = distinct !DILexicalBlock(scope: !52, file: !3, line: 28, column: 9)
+!62 = !DILocation(line: 29, column: 12, scope: !61)
+!63 = !DILocation(line: 29, column: 10, scope: !61)
+!64 = !DILocation(line: 32, column: 15, scope: !45)
+!65 = !DILocation(line: 32, column: 5, scope: !45)
+!66 = !DILocation(line: 33, column: 8, scope: !45)
+!67 = !DILocation(line: 33, column: 1, scope: !45)
+!68 = distinct !DISubprogram(name: "main", scope: !3, file: !3, line: 37, type: !69, isLocal: false, isDefinition: true, scopeLine: 38, flags: DIFlagPrototyped, isOptimized: false, unit: !2, variables: !4)
+!69 = !DISubroutineType(types: !70)
+!70 = !{!6, !6, !71}
+!71 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !72, size: 64)
+!72 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !73, size: 64)
+!73 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !74)
+!74 = !DIBasicType(name: "char", size: 8, encoding: DW_ATE_signed_char)
+!75 = !DILocalVariable(name: "argc", arg: 1, scope: !68, file: !3, line: 37, type: !6)
+!76 = !DILocation(line: 37, column: 14, scope: !68)
+!77 = !DILocalVariable(name: "argv", arg: 2, scope: !68, file: !3, line: 37, type: !71)
+!78 = !DILocation(line: 37, column: 32, scope: !68)
+!79 = !DILocation(line: 39, column: 11, scope: !68)
+!80 = !DILocation(line: 39, column: 5, scope: !68)
+!81 = !DILocalVariable(name: "res", scope: !68, file: !3, line: 40, type: !6)
+!82 = !DILocation(line: 40, column: 6, scope: !68)
+!83 = !DILocation(line: 40, column: 10, scope: !68)
+!84 = !DILocation(line: 41, column: 5, scope: !68)
+!85 = !DILocation(line: 42, column: 23, scope: !68)
+!86 = !DILocation(line: 42, column: 1, scope: !68)
+!87 = !DILocation(line: 43, column: 5, scope: !68)

@@ -1,0 +1,1 @@
+/usr/bin/c++  -fPIC   -shared  -o libvarinfo.so CMakeFiles/varinfo.dir/VarInfo.cpp.o CMakeFiles/varinfo.dir/VariableInfo.cpp.o  -L/usr/local/lib 
