@@ -92,6 +92,43 @@ bool FaultInjector::runOnFunction(Function &F) {
 
     LLVMContext &Context = F.getContext();
 
+
+    // This point to the start of the basic block
+
+
+    /** Get the argument List here */
+    for(auto arg = F.arg_begin(); arg != F.arg_end(); ++arg) {
+
+        VariableInfo *variableInfo=new VariableInfo(functionName,arg->getName());
+
+        if(faultTargetVarsMap.find(variableInfo->getKey())==faultTargetVarsMap.end()){
+            // Not found, need not instrument , instrument only the target variable
+            continue;
+        }
+
+
+        for(auto &B:F){
+            for(auto &I:B){
+                if(arg->getType()->isIntegerTy())
+                {
+                    injectFault->injectFaultOnParamIntegerValue(arg,&I);
+
+                }
+                break;
+            }
+
+            break;
+        }
+
+
+        // check the function name and so on for further analysis. even we can check at the function level.
+        // Todo : need to follow this parameter
+
+
+
+
+    }
+
     for(auto &B:F){
         for(auto &I:B){
 
@@ -117,18 +154,22 @@ bool FaultInjector::runOnFunction(Function &F) {
                // 1. Store random value and removing all store instruction to this variable.
 
                 auto type=allocaInst->getAllocatedType();
+                type->dump();
 
                 if(type->isIntegerTy() && !type->isPointerTy()){
 
 
-
-                       isModified=injectFault->injectFaultOnIntegerValue(allocaInst);
+                    isModified=injectFault->injectFaultOnIntegerValue(allocaInst);
         // inject error on integer type need to check for 32 and 64 bit
                 }
                 else if(type->isFloatTy() && !type->isPointerTy()){
                     isModified=injectFault->injectFaultOnFloatValue(allocaInst);
                 }
                 else if(type->isDoubleTy() && !type->isPointerTy()){
+                    isModified=injectFault->injectFaultOnDoubleValue(allocaInst);
+                }
+                // This is for long double type
+                else if(type->isX86_FP80Ty()){
                     isModified=injectFault->injectFaultOnDoubleValue(allocaInst);
                 }
 
@@ -179,7 +220,7 @@ bool FaultInjector::doInitialization(Module &module) {
 
 
     // Initialize target fault injection for variable, Move this one to  read from file temp as for now
-    VariableInfo *variableInfo=new VariableInfo("hello","a");
+    VariableInfo *variableInfo=new VariableInfo("hello","param");
     // Insert into the maxp
     faultTargetVarsMap[variableInfo->getKey()]=variableInfo;
 

@@ -120,6 +120,7 @@ double flipDoubleBits(double number,int numberOfBits,int bitwidth){
     // This code flip randomly one bit , extension for more than one bit also need TODO
     int randomBit=randr(0,52);
     int64_t *temp=(int64_t *) &number;
+
     long N=1L;
     *temp^=N<<randomBit;
     return number;
@@ -145,6 +146,15 @@ int injectError32IntData(int *a){
 
     //*a=1234;
     return *a;
+}
+// this is for 32 bit integer
+int8_t flipBitOn8IntegerValue(int8_t a){
+
+    // Generate a random number here
+    // Random number or Bit flip, which one is better, I think bitflip is much more practical as compared to random number.
+    int8_t res= flipBits(a,1,8);
+
+    return res;
 }
 
 // this is for 32 bit integer
@@ -200,6 +210,19 @@ double flipBitOnDoubleValue(double a){
     // Generate a random number here
     // Random number or Bit flip, which one is better, I think bitflip is much more practical as compared to random number.
     double res= flipDoubleBits(a,1,64);
+
+    // from min to max double
+    res= doubleRand(std::numeric_limits<double>::min(),std::numeric_limits<double>::max());
+    // Limit from -1 to 1
+    //res= fRand(-1,1);
+    return res;
+}
+
+long double flipBitOnDoubleValue(long double a){
+
+    // Generate a random number here
+    // Random number or Bit flip, which one is better, I think bitflip is much more practical as compared to random number.
+    double res= flipDoubleBits(a,1,80);
 
     // from min to max double
     res= doubleRand(std::numeric_limits<double>::min(),std::numeric_limits<double>::max());

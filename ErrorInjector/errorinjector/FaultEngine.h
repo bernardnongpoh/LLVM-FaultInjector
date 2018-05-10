@@ -6,6 +6,7 @@
 #define PROJECT_INJECTFAULT_H
 #include <iostream>
 #include <fstream>
+#include <set>
 #include "llvm/Pass.h"
 #include "llvm/Pass.h"
 #include "llvm/IR/Module.h"
@@ -36,6 +37,7 @@ public:
     llvm::GlobalVariable *globalDimensionArray;
     llvm::Value * runtimeclearGlobalDimensionArray;
     llvm::Value * runtimeinsertGlobalDimensionArray;
+    llvm::Value * runtimeFlipBitOn8IntegerValue; // This value is to be retrieve from runtime.c
     llvm::Value * runtimeFlipBitOn16IntegerValue; // This value is to be retrieve from runtime.c
     llvm::Value * runtimeFlipBitOn32IntegerValue; // This value is to be retrieve from runtime.c
     llvm::Value * runtimeFlipBitOn64IntegerValue; // This value is to be retrieve from runtime.c
@@ -49,10 +51,10 @@ public:
     llvm::Value *getRuntimeFlipBitOnIntegerValue() const;
 
     void setRuntimeFlipBitOnIntegerValue(llvm::Value *runtimeFlipBitOnIntegerValue);
-
+    void getStoreInst(llvm::Value *value,std::set<llvm::StoreInst*> *storeInstList,int size);
     void initialize(llvm::Module &module);
     std::string demangle(std::string name);
-
+    bool injectFaultOnParamIntegerValue(llvm::Value *value,llvm::Instruction *instruction);
     bool injectFaultOnIntegerValue(llvm::AllocaInst *allocaInst);
     bool injectFaultOnFloatValue(llvm::AllocaInst *allocaInst);
     bool injectFaultOnDoubleValue(llvm::AllocaInst *allocaInst);

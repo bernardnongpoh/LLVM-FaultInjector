@@ -6,25 +6,26 @@
 
 bool InjectFault::injectFaultOnIntegerValue(llvm::AllocaInst *allocaInst) {
     bool ismModified= false;
-    std::list<llvm::StoreInst*> storeInstList;
+    std::set<llvm::StoreInst*> storeInstList;
 
-    for (llvm::Value::user_iterator i = allocaInst->user_begin(), e = allocaInst->user_end(); i != e; ++i) {
-        // We only need StoreInst, if the the destination is the variable
 
-        if (llvm::StoreInst *storeUsedInst = llvm::dyn_cast<llvm::StoreInst>(*i)) {
-            llvm::errs()<<*storeUsedInst<<" Integer";
-            storeInstList.push_back(storeUsedInst);
-        }
-    }
+    getStoreInst(allocaInst,&storeInstList,-1);
 
     if(storeInstList.size()!=0){
         std::vector<llvm::Value*> args;
-        llvm::StoreInst *strInst = storeInstList.back();
+        llvm::StoreInst *strInst = (*storeInstList.begin());
         llvm::errs()<<*strInst<<"\n";
         args.push_back(strInst->getOperand(0));
         // Call fault injector runtime function here
         auto type=allocaInst->getAllocatedType();
         llvm::CallInst *callInst;
+
+
+        if(type->isIntegerTy(8)){
+
+            callInst = llvm::CallInst::Create(runtimeFlipBitOn8IntegerValue, args,
+                                              "flipBitOn8IntegerValue", allocaInst->getNextNode());
+        }
 
         if(type->isIntegerTy(16)){
             callInst = llvm::CallInst::Create(runtimeFlipBitOn16IntegerValue, args,
@@ -63,23 +64,14 @@ bool InjectFault::injectFaultOnIntegerValue(llvm::AllocaInst *allocaInst) {
 
 bool InjectFault::injectFaultOnFloatValue(llvm::AllocaInst *allocaInst) {
     bool ismModified= false;
-    std::list<llvm::StoreInst*> storeInstList;
-    for (llvm::Value::user_iterator i = allocaInst->user_begin(), e = allocaInst->user_end(); i != e; ++i) {
-        // We only need StoreInst, if the the destination is the variable
+    std::set<llvm::StoreInst*> storeInstList;
 
-        if (llvm::StoreInst *storeUsedInst = llvm::dyn_cast<llvm::StoreInst>(*i)) {
-            llvm::errs()<<*storeUsedInst<<" Float \n";
-            storeInstList.push_back(storeUsedInst);
+    getStoreInst(allocaInst,&storeInstList,-1);
 
-        }
-
-
-
-    }
 
     if(storeInstList.size()!=0){
         std::vector<llvm::Value*> args;
-        llvm::StoreInst *strInst = storeInstList.back();
+        llvm::StoreInst *strInst = (*storeInstList.begin());
         llvm::errs()<<*strInst<<"\n";
         args.push_back(strInst->getOperand(0));
         // Call fault injector runtime function here
@@ -108,23 +100,14 @@ bool InjectFault::injectFaultOnFloatValue(llvm::AllocaInst *allocaInst) {
 
 bool InjectFault::injectFaultOnDoubleValue(llvm::AllocaInst *allocaInst) {
     bool ismModified= false;
-    std::list<llvm::StoreInst*> storeInstList;
-    for (llvm::Value::user_iterator i = allocaInst->user_begin(), e = allocaInst->user_end(); i != e; ++i) {
-        // We only need StoreInst, if the the destination is the variable
+    std::set<llvm::StoreInst*> storeInstList;
 
-        if (llvm::StoreInst *storeUsedInst = llvm::dyn_cast<llvm::StoreInst>(*i)) {
-            llvm::errs()<<*storeUsedInst<<" double \n";
-            storeInstList.push_back(storeUsedInst);
+    getStoreInst(allocaInst,&storeInstList,-1);
 
-        }
-
-
-
-    }
 
     if(storeInstList.size()!=0){
         std::vector<llvm::Value*> args;
-        llvm::StoreInst *strInst = storeInstList.back();
+        llvm::StoreInst *strInst = (*storeInstList.begin());
         llvm::errs()<<*strInst<<"\n";
         args.push_back(strInst->getOperand(0));
         // Call fault injector runtime function here
@@ -132,12 +115,16 @@ bool InjectFault::injectFaultOnDoubleValue(llvm::AllocaInst *allocaInst) {
         llvm::CallInst *callInst;
 
         if(type->isDoubleTy()) {
+           callInst = llvm::CallInst::Create(runtimeFlipBitOnDoubleValue, args,
+                                              "flipBitOnDoubleValue", allocaInst->getNextNode());
+        }
+
+        if(type->isX86_FP80Ty()){
             callInst = llvm::CallInst::Create(runtimeFlipBitOnDoubleValue, args,
                                               "flipBitOnDoubleValue", allocaInst->getNextNode());
         }
 
         callInst->setCallingConv(llvm::CallingConv::C);
-
 
         for(llvm::StoreInst *str:storeInstList){
             // Set all First operand with the flipped value
@@ -156,17 +143,13 @@ void InjectFault::collectReAssignmentInstruction(llvm::Instruction *instruction,
 
       for (llvm::Value::user_iterator i = instruction->user_begin(), e = instruction->user_end(); i != e; ++i) {
 
-
-
         if (llvm::GetElementPtrInst *getElementPtrInst = llvm::dyn_cast<llvm::GetElementPtrInst>(*i)) {
-
             //WorkList->push_back(getElementPtrInst);
             InjectFault::collectReAssignmentInstruction(getElementPtrInst, WorkList);
            //WorkList->push_back(getElementPtrInst); // Removing this one also
-
         }
         else if(llvm::StoreInst *storeInst = llvm::dyn_cast<llvm::StoreInst>(*i)){
-            WorkList->push_back(storeInst);
+            WorkList->push_back(storeInst); // Todo: maybe we can use getStoreinst() from def-use chain here
         }
 
         else if (llvm::BitCastInst *bitCastInst = llvm::dyn_cast<llvm::BitCastInst>(*i)) {
@@ -223,7 +206,7 @@ llvm::Type* InjectFault::getDimension(llvm::Type *type,std::list<uint64_t > *a){
     // This is an array Type
     if(llvm::ArrayType *Atype=llvm::dyn_cast<llvm::ArrayType>(type)){
        a->push_back(Atype->getNumElements());
-        llvm::errs()<<"here "<<Atype->getNumElements();
+
         InjectFault::getDimension(Atype->getArrayElementType(),a);
     }
     else{
@@ -420,6 +403,13 @@ void InjectFault::initialize(llvm::Module &module) {
     for (auto F = module.getFunctionList().begin(), E = module.getFunctionList().end(); F != E; F++) {
         std::string cstr = InjectFault::demangle(F->getName().str());
 
+        if (cstr.find("flipBitOn8IntegerValue") != std::string::npos) {
+
+            runtimeFlipBitOn8IntegerValue=&*F;
+
+        }
+
+
         if (cstr.find("flipBitOn16IntegerValue") != std::string::npos) {
 
             runtimeFlipBitOn16IntegerValue=&*F;
@@ -516,6 +506,107 @@ int InjectFault::getTotalElement(std::list<uint64_t> a) {
 
     return total;
 }
+
+
+
+void InjectFault::getStoreInst(llvm::Value *value,std::set<llvm::StoreInst*> *storeInstList,int size){
+
+    // Stopping condition required Here
+    /*
+     * You might asked a Question what is this size going on here. The idea is simple. We need to track recursively
+     * the def-use chain that is a->b->c and so. Since def-use is just a list we need a stopping condition here
+     * we stopped when the have seen same size twice otherwise keep on looking.
+     */
+
+    if(storeInstList->size()==size) return;
+
+
+    for (llvm::Value::user_iterator i = value->user_begin(), e = value->user_end(); i != e; ++i) {
+        // We only need StoreInst, if the the destination is the variable
+        // recursively find def-use change here
+        if (llvm::StoreInst *storeUsedInst = llvm::dyn_cast<llvm::StoreInst>(*i)) {
+            size= storeInstList->size();
+            storeInstList->insert(storeUsedInst);
+           //llvm::errs()<<"Number Uses"<< storeUsedInst->getOperand(1)->getNumUses();
+            getStoreInst(storeUsedInst->getOperand(1),storeInstList,size);
+
+
+        }
+    }
+
+
+
+}
+
+
+
+
+// Inject a call to the start of basic block of the function.
+bool InjectFault::injectFaultOnParamIntegerValue(llvm::Value *value,llvm::Instruction *instruction) {
+
+    instruction->dump();
+
+    bool ismModified= false;
+    std::set<llvm::StoreInst*> storeInstList;
+
+// -1 here is just for comparison. ie since the size is initial zero
+    getStoreInst(value,&storeInstList,-1);
+
+   if(storeInstList.size()!=0){
+        std::vector<llvm::Value*> args;
+        llvm::StoreInst *strInst = (*storeInstList.begin());
+        llvm::errs()<<*strInst<<"\n";
+        args.push_back(strInst->getOperand(0));
+        // Call fault injector runtime function here
+        auto type=value->getType();
+        llvm::CallInst *callInst;
+
+
+        if(type->isIntegerTy(8)){
+
+            callInst = llvm::CallInst::Create(runtimeFlipBitOn8IntegerValue, args,
+                                              "flipBitOn8IntegerValue", instruction);
+        }
+
+        if(type->isIntegerTy(16)){
+            callInst = llvm::CallInst::Create(runtimeFlipBitOn16IntegerValue, args,
+                                              "flipBitOn16IntegerValue", instruction);
+        }
+
+
+        if(type->isIntegerTy(32)) {
+
+            callInst = llvm::CallInst::Create(runtimeFlipBitOn32IntegerValue, args,
+                                              "flipBitOn32IntegerValue",instruction);
+
+
+        }
+        else if(type->isIntegerTy(64)){
+            callInst = llvm::CallInst::Create(runtimeFlipBitOn64IntegerValue, args,
+                                              "flipBitOn64IntegerValue", instruction);
+        }
+
+        callInst->setCallingConv(llvm::CallingConv::C);
+
+
+        for(llvm::StoreInst *str:storeInstList){
+            // Set all First operand with the flipped value
+            str->setOperand(0,callInst);
+
+            ismModified=true;
+        }
+
+
+    }
+
+    return ismModified;
+
+
+
+}
+
+
+
 
 
 
