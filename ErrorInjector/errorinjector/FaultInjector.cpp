@@ -220,7 +220,7 @@ bool FaultInjector::doInitialization(Module &module) {
 
 
     // Initialize target fault injection for variable, Move this one to  read from file temp as for now
-    VariableInfo *variableInfo=new VariableInfo("hello","param");
+    VariableInfo *variableInfo=new VariableInfo("hello","a");
     // Insert into the maxp
     faultTargetVarsMap[variableInfo->getKey()]=variableInfo;
 
