@@ -32,13 +32,10 @@ bool InjectFault::injectFaultOnIntegerValue(llvm::AllocaInst *allocaInst) {
                                               "flipBitOn16IntegerValue", strInst);
         }
 
-
         if(type->isIntegerTy(32)) {
 
             callInst = llvm::CallInst::Create(runtimeFlipBitOn32IntegerValue, args,
                                                               "flipBitOn32IntegerValue", strInst);
-
-
         }
         else if(type->isIntegerTy(64)){
             callInst = llvm::CallInst::Create(runtimeFlipBitOn64IntegerValue, args,
@@ -80,7 +77,7 @@ bool InjectFault::injectFaultOnFloatValue(llvm::AllocaInst *allocaInst) {
 
         if(type->isFloatTy()) {
             callInst = llvm::CallInst::Create(runtimeFlipBitOnFloatValue, args,
-                                              "flipBitOnFloatValue", allocaInst->getNextNode());
+                                              "flipBitOnFloatValue", strInst);
         }
 
         callInst->setCallingConv(llvm::CallingConv::C);
@@ -110,33 +107,42 @@ bool InjectFault::injectFaultOnDoubleValue(llvm::AllocaInst *allocaInst) {
     if(storeInstList.size()!=0){
         std::vector<llvm::Value*> args;
         llvm::StoreInst *strInst = (*storeInstList.begin());
-        strInst->dump();
-        args.push_back(strInst->getOperand(0));
+
+        if(llvm::Constant *c=llvm::dyn_cast<llvm::Constant>(strInst->getOperand(0))) {
+            llvm::Value *value = llvm::dyn_cast<llvm::Value>(c);
+
+            args.push_back(value);
+
+         }
+        else{
+            args.push_back(strInst->getOperand(0));
+        }
+
         // Call fault injector runtime function here
         auto type=allocaInst->getAllocatedType();
         llvm::CallInst *callInst;
 
         if(type->isDoubleTy()) {
-           strInst->getOperand(0)->dump();
+
+
+            //runtimeFlipBitOnDoubleValue->dump();
             callInst = llvm::CallInst::Create(runtimeFlipBitOnDoubleValue, args,
-                                              "flipBitOnDoubleValue", strInst->getNextNode()->getNextNode());
+                                              "flipBitOnDoubleValue", strInst);
 
-
-            callInst->dump();
 
         }
 
         if(type->isX86_FP80Ty()){
-            callInst = llvm::CallInst::Create(runtimeFlipBitOnDoubleValue, args,
-                                              "flipBitOnDoubleValue", strInst->getNextNode());
+            callInst = llvm::CallInst::Create(runtimeFlipBitOnLongDoubleValue, args,
+                                              "flipBitOnLongDoubleValue", strInst);
         }
 
         callInst->setCallingConv(llvm::CallingConv::C);
 
         for(llvm::StoreInst *str:storeInstList){
-            if(str->getValueID()==strInst->getValueID()) continue;
+            //if(str->getValueID()==strInst->getValueID()) continue;
             // Set all First operand with the flipped value
-          //  str->setOperand(0,callInst);
+           str->setOperand(0,callInst);
             ismModified=true;
         }
 
@@ -446,6 +452,13 @@ void InjectFault::initialize(llvm::Module &module) {
         else if (cstr.find("flipBitOnDoubleValue") != std::string::npos) {
 
             runtimeFlipBitOnDoubleValue=&*F;
+
+        }
+
+
+        else if (cstr.find("flipBitOnLongDoubleValue") != std::string::npos) {
+
+            runtimeFlipBitOnLongDoubleValue=&*F;
 
         }
 

@@ -21,8 +21,13 @@
 #include "boost/algorithm/string.hpp"
 #include "VariableInfo.h"
 #include "FaultEngine.h"
+#include "tinyxml2.h"
 
 using namespace llvm;
+
+
+cl::opt<std::string> InputFileName("input", cl::desc("Specify input XML filename"), cl::value_desc("xml-filename"),cl::ValueRequired);
+
 namespace {
     class FaultInjector: public ModulePass{
     public:
@@ -132,6 +137,10 @@ bool FaultInjector::runOnFunction(Function &F) {
     for(auto &B:F){
         for(auto &I:B){
 
+            if(LoadInst *loadInst = dyn_cast<LoadInst>(&I)){
+
+            }
+
             if (AllocaInst *allocaInst = dyn_cast<AllocaInst>(&I)) {
 
                 // There is a problem here : either tracking by allocaInst or by dbgDeclareInst.
@@ -154,13 +163,11 @@ bool FaultInjector::runOnFunction(Function &F) {
                // 1. Store random value and removing all store instruction to this variable.
 
                 auto type=allocaInst->getAllocatedType();
-                type->dump();
+
 
                 if(type->isIntegerTy() && !type->isPointerTy()){
-
-
                     isModified=injectFault->injectFaultOnIntegerValue(allocaInst);
-        // inject error on integer type need to check for 32 and 64 bit
+                    // inject error on integer type need to check for 32 and 64 bit
                 }
                 else if(type->isFloatTy() && !type->isPointerTy()){
                     isModified=injectFault->injectFaultOnFloatValue(allocaInst);
@@ -200,7 +207,10 @@ bool FaultInjector::runOnFunction(Function &F) {
 bool FaultInjector::doFinalization(Module &module) {
     // Here write to a file
     std::ofstream myfile;
-    myfile.open ("varinfo.out");
+
+
+
+
 
 
     for(VariableInfo *variableInfo: faultTargetVars){
@@ -219,14 +229,38 @@ bool FaultInjector::doInitialization(Module &module) {
     injectFault->initialize(module);
 
 
+    /* READING input file for variable information from *.xml file */
+
+    tinyxml2::XMLDocument xmlDocument(InputFileName.getValue().c_str());
+    tinyxml2::XMLError  error=xmlDocument.LoadFile(InputFileName.getValue().c_str());
+
+    if(error==tinyxml2::XMLError::XML_SUCCESS){
+        // Successfully Parse the file
+        tinyxml2::XMLElement *root,*element;
+        root= xmlDocument.FirstChildElement("Program");
+        if(root){
+            element=root->FirstChildElement("Variable");
+            while(element){
+                VariableInfo *variableInfo=new VariableInfo(element->Attribute("function"),element->Attribute("name"));
+                // Insert into the maxp
+                faultTargetVarsMap[variableInfo->getKey()]=variableInfo;
+                element=element->NextSiblingElement("Variable");
+            }
+        }
+    }
+    else{
+        errs()<<"Error reading "<< InputFileName.getValue() <<" File";
+    }
+
+
+
+
+
     // Initialize target fault injection for variable, Move this one to  read from file temp as for now
-    VariableInfo *variableInfo=new VariableInfo("hello","a");
-    // Insert into the maxp
-    faultTargetVarsMap[variableInfo->getKey()]=variableInfo;
+
 
     for(std::pair<std::string,VariableInfo*> pair: faultTargetVarsMap){
         errs()<<pair.first;
-
     }
 
 

@@ -43,6 +43,7 @@ public:
     llvm::Value * runtimeFlipBitOn64IntegerValue; // This value is to be retrieve from runtime.c
     llvm::Value * runtimeFlipBitOnFloatValue; // This value is to be retrieve from runtime.c
     llvm::Value * runtimeFlipBitOnDoubleValue; // This value is to be retrieve from runtime.c
+    llvm::Value * runtimeFlipBitOnLongDoubleValue;
     llvm::Value * runtimeInitializeRandomIntegerArrayValue; // This value is to be retrieve from runtime.c
     llvm::Value * runtimeInitializeRandomDoubleArrayValue; // This value is to be retrieve from runtime.c
     llvm::Value * runtimeInitializeRandomFloatArrayValue; // This value is to be retrieve from runtime.c

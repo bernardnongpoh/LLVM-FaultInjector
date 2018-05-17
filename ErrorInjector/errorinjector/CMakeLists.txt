@@ -1,7 +1,7 @@
 add_library(errorinjector MODULE
     # List your source files here.
         FaultInjector.cpp
-        VariableInfo.cpp VariableInfo.h FaultEngine.cpp FaultEngine.h)
+        VariableInfo.cpp VariableInfo.h FaultEngine.cpp FaultEngine.h tinyxml2.cpp tinyxml2.h)
 
 # Use C++11 to compile our pass (i.e., supply -std=c++11).
 target_compile_features(errorinjector PRIVATE cxx_range_for cxx_auto_type)
