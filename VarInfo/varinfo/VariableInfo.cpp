@@ -1,5 +1,6 @@
 //
 // Created by bernard on 6/12/17.
+//This File is for Variable information such as variable name, type and scope. 
 //
 
 #include "VariableInfo.h"
